@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NobleFrame Labs – Audit & Pricing</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Favicon: use ICO for better browser support -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Website Audit & Pricing</h1>
+            <p>Kostenloser Audit in 3 Minuten – Plus transparenter Pricing-Konfigurator mit Live-ROI</p>
+        </header>
+
+        <!-- ========== AUDIT WIZARD ========== -->
+        <div id="wizardContainer">
+            <div class="wizard active" data-step="1">
+                <div class="step-indicator">Schritt 1 von 8</div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 12.5%;"></div></div>
+                <div class="step">
+                    <h2>Deine Branche & Ziel</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Branche/Industrie</label>
+                            <input type="text" id="industry" placeholder="z.B. SaaS, E-Commerce, Agentur" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Hauptziel deiner Website</label>
+                            <select id="goal" required>
+                                <option value="">-- Wählen --</option>
+                                <option value="Lead Generation">Lead Generation</option>
+                                <option value="E-Commerce">E-Commerce / Shop</option>
+                                <option value="Brand Awareness">Brand Awareness</option>
+                                <option value="Customer Support">Customer Support</option>
+                                <option value="Content Hub">Content Hub / Blog</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Was bietest du an? (Kurztext)</label>
+                        <textarea id="offering" placeholder="Beschreib kurz dein Angebot (1-2 Sätze)" required></textarea>
+                    </div>
+                    <div class="buttons">
+                        <button class="btn btn-primary" onclick="nextStep(1)">Weiter</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wizard" data-step="2">
+                <div class="step-indicator">Schritt 2 von 8</div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 25%;"></div></div>
+                <div class="step">
+                    <h2>Zielgruppe & Website</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Zielgruppe (z.B. KMU, Startups)</label>
+                            <input type="text" id="audience" placeholder="Beispiel: Kleine und mittlere Unternehmen" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Aktuelle Website-URL</label>
+                            <input type="url" id="websiteUrl" placeholder="https://example.com" required>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <button class="btn btn-secondary" onclick="prevStep(2)">Zurück</button>
+                        <button class="btn btn-primary" onclick="nextStep(2)">Weiter</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wizard" data-step="3">
+                <div class="step-indicator">Schritt 3 von 8</div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 37.5%;"></div></div>
+                <div class="step">
+                    <h2>Deine Top 3 Konkurrenten</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px;">Gib bis zu 3 Konkurrenz-URLs ein</p>
+                    <div class="form-group">
+                        <label>Konkurrenz 1</label>
+                        <input type="url" id="competitor1" placeholder="https://competitor.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Konkurrenz 2</label>
+                        <input type="url" id="competitor2" placeholder="https://competitor.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Konkurrenz 3</label>
+                        <input type="url" id="competitor3" placeholder="https://competitor.com">
+                    </div>
+                    <div class="buttons">
+                        <button class="btn btn-secondary" onclick="prevStep(3)">Zurück</button>
+                        <button class="btn btn-primary" onclick="nextStep(3)">Weiter</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wizard" data-step="4">
+                <div class="step-indicator">Schritt 4 von 8</div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 50%;"></div></div>
+                <div class="step">
+                    <h2>Gewünschter Design-Stil</h2>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item">
+                            <input type="radio" name="style" value="Seriös" required>
+                            <span><strong>Seriös</strong> – Vertrauen, Corporate, Professional</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="radio" name="style" value="Cyber">
+                            <span><strong>Cyber</strong> – Modern, Tech-fokussiert, Futuristisch</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="radio" name="style" value="Minimal">
+                            <span><strong>Minimal</strong> – Clean, Simple, Fokussiert</span>
+                        </label>
+                    </div>
+                    <div class="buttons">
+                        <button class="btn btn-secondary" onclick="prevStep(4)">Zurück</button>
+                        <button class="btn btn-primary" onclick="nextStep(4)">Weiter</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wizard" data-step="5">
+                <div class="step-indicator">Schritt 5 von 8</div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 62.5%;"></div></div>
+                <div class="step">
+                    <h2>Dein Budget für Website-Entwicklung</h2>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item">
+                            <input type="radio" name="budget" value="< 5.000€" required>
+                            <span>Unter 5.000€</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="radio" name="budget" value="5.000€ - 15.000€">
+                            <span>5.000€ - 15.000€</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="radio" name="budget" value="15.000€ - 50.000€">
+                            <span>15.000€ - 50.000€</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="radio" name="budget" value="> 50.000€">
+                            <span>Über 50.000€ (Enterprise)</span>
+                        </label>
+                    </div>
+                    <div class="buttons">
+                        <button class="btn btn-secondary" onclick="prevStep(5)">Zurück</button>
+                        <button class="btn btn-primary" onclick="nextStep(5)">Weiter</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wizard" data-step="6">
+                <div class="step-indicator">Schritt 6 von 8</div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 75%;"></div></div>
+                <div class="step">
+                    <h2>Aktuelle Herausforderungen</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px;">Welche Probleme hast du? (Mehrfachauswahl)</p>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="painpoints" value="Low Conversion">
+                            <span>Niedrige Conversion Rate</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="painpoints" value="Poor Mobile">
+                            <span>Schlecht auf Mobilgeräten</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="painpoints" value="Slow Performance">
+                            <span>Langsame Ladezeiten</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="painpoints" value="Low SEO">
+                            <span>Schlecht in Google sichtbar</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="painpoints" value="Poor Design">
+                            <span>Veraltetes Design</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="painpoints" value="Outdated Tech">
+                            <span>Veraltete Technologie</span>
+                        </label>
+                    </div>
+                    <div class="buttons">
+                        <button class="btn btn-secondary" onclick="prevStep(6)">Zurück</button>
+                        <button class="btn btn-primary" onclick="nextStep(6)">Weiter</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wizard" data-step="7">
+                <div class="step-indicator">Schritt 7 von 8</div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 87.5%;"></div></div>
+                <div class="step">
+                    <h2>Deine Kontaktdaten</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" id="name" placeholder="Dein Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="email" placeholder="deine@email.de" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="consent" required>
+                            <span style="color: var(--text-secondary);">Ich bin einverstanden, dass NobleFrame mir personalisierte Empfehlungen schickt</span>
+                        </label>
+                    </div>
+                    <div class="buttons">
+                        <button class="btn btn-secondary" onclick="prevStep(7)">Zurück</button>
+                        <button class="btn btn-primary" onclick="generateReport()">Audit starten!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== AUDIT REPORT ========== -->
+        <div id="reportContainer" class="report">
+            <div style="text-align: right; margin-bottom: 24px;">
+                <button class="print-btn" onclick="window.print()">📄 Als PDF drucken</button>
+            </div>
+
+            <div class="score-grid">
+                <div class="score-card">
+                    <div class="score-value" id="scoreUx">78</div>
+                    <div class="score-label">UX Score</div>
+                </div>
+                <div class="score-card">
+                    <div class="score-value" id="scoreSeo">65</div>
+                    <div class="score-label">SEO Score</div>
+                </div>
+                <div class="score-card">
+                    <div class="score-value" id="scorePerf">72</div>
+                    <div class="score-label">Performance</div>
+                </div>
+                <div class="score-card">
+                    <div class="score-value" id="scoreTrust">81</div>
+                    <div class="score-label">Trust Score</div>
+                </div>
+                <div class="score-card">
+                    <div class="score-value" id="scoreConv">68</div>
+                    <div class="score-label">Conversion</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Gesamtbewertung: <span id="overallScore">73</span>/100</h3>
+                <p id="overallMessage" style="color: var(--text-secondary); margin-top: 12px;"></p>
+            </div>
+
+            <div class="section">
+                <h3>Top 10 Quick Wins (0-2 Wochen)</h3>
+                <div id="quickWins"></div>
+            </div>
+
+            <div class="section">
+                <h3>Top 5 High-Impact Maßnahmen</h3>
+                <div id="highImpact"></div>
+            </div>
+
+            <div class="section">
+                <h3>Empfohlene Sitemap</h3>
+                <div id="sitemap" style="color: var(--text-secondary); white-space: pre-wrap; font-family: monospace; font-size: 0.9rem;"></div>
+            </div>
+
+            <div class="section">
+                <h3>👥 Optimierter User Flow</h3>
+                <div id="userFlow"></div>
+            </div>
+
+            <div class="section">
+                <h3>✍️ Hero-Copy & CTA-Varianten</h3>
+                <h4>Headline Varianten:</h4>
+                <div id="headlines"></div>
+                <h4>CTA Button Texte:</h4>
+                <div id="ctas"></div>
+            </div>
+
+            <div class="section">
+                <h3>📅 Website-Roadmap</h3>
+                <h4>MVP (Phase 1 - Wochen 1-4):</h4>
+                <div id="mvp"></div>
+                <h4>V2 (Phase 2 - Wochen 5-12):</h4>
+                <div id="v2"></div>
+                <h4>V3 (Phase 3 - Wochen 13+):</h4>
+                <div id="v3"></div>
+            </div>
+
+            <div class="section">
+                <h3>🎯 Nächste Schritte</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 20px;">Dein Audit ist fertig!</p>
+                <div class="cta-group">
+                    <button class="btn btn-primary" onclick="contactConsultation()">🤝 Beratungsgespräch buchen</button>
+                    <button class="btn btn-secondary" onclick="location.href='/'">Zurück zur Startseite</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== PRICING CONFIGURATOR ========== -->
+        <h2 class="pricing-section-title">💰 Pricing Configurator</h2>
+        <p class="pricing-subline">Stelle dein Paket zusammen – sieh Preis & ROI in Echtzeit</p>
+
+        <div class="config-wrapper">
+            <div class="configurator">
+                <h2>Konfiguriere dein Paket</h2>
+
+                <div class="config-section">
+                    <label class="config-label">1. Wähle dein Paket</label>
+                    <div class="package-grid">
+                        <div class="package-option">
+                            <input type="radio" id="pkg-startup" name="package" value="startup" checked onchange="updateCalculation()">
+                            <label for="pkg-startup">
+                                <div class="package-name">Startup Web</div>
+                                <div class="package-desc">ab 5.000€ • 4 Wochen</div>
+                            </label>
+                        </div>
+                        <div class="package-option">
+                            <input type="radio" id="pkg-growth" name="package" value="growth" onchange="updateCalculation()">
+                            <label for="pkg-growth">
+                                <div class="package-name">Growth Web</div>
+                                <div class="package-desc">10.000€ - 25.000€ • 8-10 Wochen</div>
+                            </label>
+                        </div>
+                        <div class="package-option">
+                            <input type="radio" id="pkg-enterprise" name="package" value="enterprise" onchange="updateCalculation()">
+                            <label for="pkg-enterprise">
+                                <div class="package-name">Enterprise Solution</div>
+                                <div class="package-desc">ab 50.000€ • 12-16 Wochen</div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <label class="config-label">2. Wähle Add-ons (Optional)</label>
+                    <div class="addon-grid">
+                        <div class="addon-item">
+                            <input type="checkbox" id="addon-seo" onchange="updateCalculation()">
+                            <label for="addon-seo">
+                                <span>SEO Content Hub (20+ Artikel)</span>
+                                <span class="addon-price">+3.000€</span>
+                            </label>
+                        </div>
+                        <div class="addon-item">
+                            <input type="checkbox" id="addon-email" onchange="updateCalculation()">
+                            <label for="addon-email">
+                                <span>E-Mail Marketing Setup</span>
+                                <span class="addon-price">+1.500€</span>
+                            </label>
+                        </div>
+                        <div class="addon-item">
+                            <input type="checkbox" id="addon-app" onchange="updateCalculation()">
+                            <label for="addon-app">
+                                <span>Mobile App (React Native)</span>
+                                <span class="addon-price">+8.000€</span>
+                            </label>
+                        </div>
+                        <div class="addon-item">
+                            <input type="checkbox" id="addon-chatbot" onchange="updateCalculation()">
+                            <label for="addon-chatbot">
+                                <span>AI Chatbot</span>
+                                <span class="addon-price">+2.000€</span>
+                            </label>
+                        </div>
+                        <div class="addon-item">
+                            <input type="checkbox" id="addon-brand" onchange="updateCalculation()">
+                            <label for="addon-brand">
+                                <span>Brand Identity</span>
+                                <span class="addon-price">+2.500€</span>
+                            </label>
+                        </div>
+                        <div class="addon-item">
+                            <input type="checkbox" id="addon-analytics" onchange="updateCalculation()">
+                            <label for="addon-analytics">
+                                <span>Advanced Analytics</span>
+                                <span class="addon-price">+1.000€</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <div class="slider-group">
+                        <div class="slider-label">
+                            <span class="config-label" style="margin-bottom: 0;">3. Wie dringend?</span>
+                            <span id="urgencyLabel">Normal</span>
+                        </div>
+                        <input type="range" id="urgency" min="1" max="3" value="1" onchange="updateCalculation()">
+                        <div style="display: flex; justify-content: space-between; color: var(--text-secondary); font-size: 0.8rem; margin-top: 8px;">
+                            <span>Normal</span>
+                            <span>Express</span>
+                            <span>ASAP 🚨</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <div class="slider-group">
+                        <div class="slider-label">
+                            <span class="config-label" style="margin-bottom: 0;">4. Wie viele Seiten?</span>
+                            <span id="pagesLabel">5-8 Seiten</span>
+                        </div>
+                        <input type="range" id="pages" min="1" max="4" value="1" onchange="updateCalculation()">
+                        <div style="display: flex; justify-content: space-between; color: var(--text-secondary); font-size: 0.8rem; margin-top: 8px;">
+                            <span>5-8</span>
+                            <span>10-15</span>
+                            <span>20-30</span>
+                            <span>50+</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="summary">
+                <h2>Dein Angebot</h2>
+
+                <div class="price-box">
+                    <div class="price-label">Geschätzter Preis</div>
+                    <div class="price-value" id="totalPrice">5.000€</div>
+                    <div class="price-note" id="priceNote">Basis Paket</div>
+                </div>
+
+                <div class="timeline-box">
+                <div class="timeline-label">Geschätzte Lieferzeit</div>
+                    <div class="timeline-value" id="timeline">4 Wochen</div>
+                </div>
+
+                <div class="summary-section">
+                    <div class="summary-title">Included in Package</div>
+                    <ul class="features-list" id="packageFeatures">
+                        <li>Landing Page</li>
+                        <li>Responsive Design</li>
+                        <li>Performance Opt.</li>
+                    </ul>
+                </div>
+
+                <div class="summary-section" id="addonsSection" style="display: none;">
+                    <div class="summary-title">Deine Add-ons</div>
+                    <div id="selectedAddons"></div>
+                </div>
+
+                <div class="roi-box">
+                    <div class="roi-title">Geschätzter ROI</div>
+                    <div class="roi-calc">
+                        <div class="roi-row">
+                            <span class="roi-label">Neue Leads/Monat:</span>
+                            <span class="roi-value" id="roiLeads">+45</span>
+                        </div>
+                        <div class="roi-row">
+                            <span class="roi-label">Ø Deal-Wert:</span>
+                            <span class="roi-value" id="roiDealValue">2.500€</span>
+                        </div>
+                        <div class="roi-row">
+                            <span class="roi-label">Conversion (4%):</span>
+                            <span class="roi-value" id="roiConversions">+2 Clients</span>
+                        </div>
+                        <div class="roi-row roi-total">
+                            <span>Monatlicher Return:</span>
+                            <span id="roiMonthly">+5.000€</span>
+                        </div>
+                        <div style="color: var(--text-secondary); font-size: 0.75rem; margin-top: 8px; text-align: center;">
+                            💡 ROI Ausgleich in <span id="paybackMonths">1 Monat</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="cta-button" onclick="requestQuote()">Angebot anfordern →</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast" style="display: none;"></div>
+    <script src="script.js"></script>
+    <!-- Optional: hide sections based on tool parameter -->
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        const params = new URLSearchParams(window.location.search);
+        const tool = params.get('tool');
+        if (!tool) return;
+        // Hide pricing configurator for audit or brief tools
+        if (tool === 'audit' || tool === 'brief') {
+          const pricingTitle = document.querySelector('.pricing-section-title');
+          const pricingSubline = document.querySelector('.pricing-subline');
+          const configWrapper = document.querySelector('.config-wrapper');
+          if (pricingTitle) pricingTitle.style.display = 'none';
+          if (pricingSubline) pricingSubline.style.display = 'none';
+          if (configWrapper) configWrapper.style.display = 'none';
+        }
+        // Hide audit wizard and report for the ROI tool
+        if (tool === 'roi') {
+          const wizard = document.getElementById('wizardContainer');
+          const report = document.getElementById('reportContainer');
+          if (wizard) wizard.style.display = 'none';
+          if (report) report.style.display = 'none';
+        }
+      });
+    </script>
+</body>
+</html>

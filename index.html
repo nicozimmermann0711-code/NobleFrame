@@ -1,0 +1,2761 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f1419" />
+  <title>NobleFrame – Full‑Stack Digital Innovation</title>
+  <meta name="description" content="NobleFrame: Full‑Stack Web Development, E‑Commerce & Growth Hacking – seriös, performant, mit intelligenter Technologie." />
+    <!-- Favicon: use ICO for better browser support -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <style>
+    /* ════════════════════════════════════════════════════════════
+       NobleFrame 2.0 – PREMIUM DESIGN SYSTEM
+       ════════════════════════════════════════════════════════════ */
+
+    :root {
+      /* Colors: Dark + Grau
+         Überarbeitete Farbtöne für das neue NobleFrame‑Branding in Cyan/Pink.
+         Die Hintergründe sind blauer/gräulicher für eine seriösere Optik.
+      */
+      --bg-primary: #0c152a;
+      /* Hellere Sekundär- und Tertiärfarben für dezenten Kontrast */
+      /* Slightly lighter blues for secondary and tertiary backgrounds to introduce more grey‑blue contrast */
+      --bg-secondary: #1a2d4b;
+      --bg-tertiary: #233961;
+      
+      /* Texte in hellen Blautönen für bessere Lesbarkeit */
+      --text-primary: #e5f0fa;
+      --text-secondary: #a6b5cc;
+      --text-muted: #7c8ba1;
+      
+      --line: rgba(229, 240, 250, 0.08);
+      --line-hover: rgba(229, 240, 250, 0.15);
+      
+      /* Akzent: Cyan + Pink – neues NobleFrame Branding */
+      --cyan: #00d4ff;
+      /* Hellere Akzentfarbe für Hover/Effekte */
+      --cyan-light: #5bd6ff;
+      /* Glow in Cyan‑Tönen */
+      --cyan-glow: rgba(0, 212, 255, 0.3);
+      --cyan-glow-light: rgba(0, 212, 255, 0.15);
+
+      /* Pinker Gegenpol für den Verlauf */
+      --pink: #ff006e;
+      /* Gradient für animierte Elemente, z.B. Code‑Lines */
+      --gradient: linear-gradient(135deg, var(--cyan), var(--pink));
+      
+      /* Grauabstufungen */
+      --gray-accent: #556983;
+      --gray-light: #657793;
+      
+      /* Shadows + Glow – angepasst an die neue Hauptfarbe */
+      --shadow-sm: 0 4px 12px rgba(0, 212, 255, 0.08);
+      --shadow-md: 0 12px 36px rgba(0, 212, 255, 0.12);
+      --shadow-lg: 0 24px 60px rgba(0, 212, 255, 0.16);
+      --glow: 0 0 20px rgba(0, 212, 255, 0.25);
+      --glow-intense: 0 0 40px rgba(0, 212, 255, 0.35);
+      
+      /* Spacing */
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 16px;
+      --space-lg: 24px;
+      --space-xl: 32px;
+      --space-2xl: 48px;
+      
+      /* Border Radius */
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --radius-full: 999px;
+
+      /* Additional brand variables */
+      --red: #ff4d4d;
+      /* RGB definitions for gradient shadows */
+      --cyan-rgb: 0, 212, 255;
+      --pink-rgb: 255, 0, 110;
+      
+      /* Typography */
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'Monaco', 'Courier New', monospace;
+    }
+
+/* Light theme variables: when `data-theme="light"` is set on the html element */
+:root[data-theme="light"] {
+  --bg-primary: #f5f7fa;
+  --bg-secondary: #ebeff5;
+  --bg-tertiary: #e3eaf3;
+  --text-primary: #0c152a;
+  --text-secondary: #344060;
+  --text-muted: #667799;
+  --line: rgba(12, 21, 42, 0.08);
+  --line-hover: rgba(12, 21, 42, 0.12);
+  /* Accents remain consistent across themes */
+  /* Shadow values may appear slightly darker on light backgrounds */
+  --shadow-sm: 0 4px 12px rgba(0, 212, 255, 0.04);
+  --shadow-md: 0 12px 36px rgba(0, 212, 255, 0.08);
+  --shadow-lg: 0 24px 60px rgba(0, 212, 255, 0.12);
+  --glow: 0 0 20px rgba(0, 212, 255, 0.15);
+  --glow-intense: 0 0 40px rgba(0, 212, 255, 0.25);
+}
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    ul { list-style: none; }
+
+    /* Animations */
+    @keyframes fall {
+      from { transform: translateY(-100px); opacity: 0; }
+      10% { opacity: 0.8; }
+      90% { opacity: 0.8; }
+      to { transform: translateY(100vh); opacity: 0; }
+    }
+
+    @keyframes logoRotate {
+      0%, 100% { transform: rotateZ(0deg) rotateX(0deg); }
+      25% { transform: rotateZ(5deg) rotateX(2deg); }
+      50% { transform: rotateZ(-5deg) rotateX(-2deg); }
+      75% { transform: rotateZ(3deg) rotateX(1deg); }
+    }
+
+    @keyframes logoPulse {
+      0%, 100% { box-shadow: var(--glow-intense), inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 0 30px rgba(141, 85, 255, 0.3); }
+      50% { box-shadow: var(--glow-intense), inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 0 60px rgba(141, 85, 255, 0.6); }
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Additional animations for the NobleFrame logo */
+    @keyframes rotateCW {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes rotateCCW {
+      from { transform: rotate(360deg); }
+      to { transform: rotate(0deg); }
+    }
+
+    @keyframes pulseBig {
+      0%, 100% {
+        opacity: 0.4;
+        transform: scale(0.95);
+        filter: drop-shadow(0 0 8px rgba(255, 110, 199, 0.6));
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 25px rgba(255, 110, 199, 1));
+      }
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: var(--glow); }
+      50% { box-shadow: var(--glow-intense); }
+    }
+
+    @keyframes shimmer {
+      0%, 100% { transform: translate(-50%, -50%); }
+      50% { transform: translate(50%, 50%); }
+    }
+
+    @keyframes cardReveal {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Background */
+    .bg-animate {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .code-line {
+      position: absolute;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      /* Die fallenden Zeilen bekommen einen Gradient als Textfarbe */
+      white-space: nowrap;
+      animation: fall linear infinite;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      opacity: 0.18;
+    }
+
+    .code-line:nth-child(1) { left: 2%; animation-duration: 8s; animation-delay: 0s; }
+    .code-line:nth-child(2) { left: 8%; animation-duration: 10s; animation-delay: 1s; }
+    .code-line:nth-child(3) { left: 14%; animation-duration: 12s; animation-delay: 2s; }
+    .code-line:nth-child(4) { left: 20%; animation-duration: 9s; animation-delay: 0.5s; }
+    .code-line:nth-child(5) { left: 26%; animation-duration: 11s; animation-delay: 1.5s; }
+    .code-line:nth-child(6) { left: 32%; animation-duration: 10s; animation-delay: 2.5s; }
+    .code-line:nth-child(7) { left: 38%; animation-duration: 13s; animation-delay: 0s; }
+    .code-line:nth-child(8) { left: 44%; animation-duration: 9s; animation-delay: 1s; }
+    .code-line:nth-child(9) { left: 50%; animation-duration: 11s; animation-delay: 2s; }
+    .code-line:nth-child(10) { left: 56%; animation-duration: 10s; animation-delay: 0.5s; }
+    .code-line:nth-child(11) { left: 62%; animation-duration: 12s; animation-delay: 1.5s; }
+    .code-line:nth-child(12) { left: 68%; animation-duration: 9s; animation-delay: 2s; }
+    .code-line:nth-child(13) { left: 74%; animation-duration: 11s; animation-delay: 0s; }
+    .code-line:nth-child(14) { left: 80%; animation-duration: 10s; animation-delay: 1s; }
+    .code-line:nth-child(15) { left: 86%; animation-duration: 13s; animation-delay: 1.5s; }
+    .code-line:nth-child(16) { left: 92%; animation-duration: 10s; animation-delay: 2.5s; }
+    .code-line:nth-child(17) { left: 5%; animation-duration: 11s; animation-delay: 0.8s; }
+    .code-line:nth-child(18) { left: 35%; animation-duration: 12s; animation-delay: 1.3s; }
+    .code-line:nth-child(19) { left: 65%; animation-duration: 9s; animation-delay: 1.8s; }
+    .code-line:nth-child(20) { left: 95%; animation-duration: 10s; animation-delay: 0.3s; }
+
+    /* Additional code-line slots for even richer animation */
+    .code-line:nth-child(21) { left: 3%; animation-duration: 9s; animation-delay: 0.7s; }
+    .code-line:nth-child(22) { left: 9%; animation-duration: 11s; animation-delay: 1.8s; }
+    .code-line:nth-child(23) { left: 15%; animation-duration: 10s; animation-delay: 2.6s; }
+    .code-line:nth-child(24) { left: 21%; animation-duration: 13s; animation-delay: 0.2s; }
+    .code-line:nth-child(25) { left: 27%; animation-duration: 8s; animation-delay: 1.2s; }
+    .code-line:nth-child(26) { left: 33%; animation-duration: 12s; animation-delay: 2.1s; }
+    .code-line:nth-child(27) { left: 39%; animation-duration: 9s; animation-delay: 0.9s; }
+    .code-line:nth-child(28) { left: 45%; animation-duration: 11s; animation-delay: 1.6s; }
+    .code-line:nth-child(29) { left: 51%; animation-duration: 10s; animation-delay: 2.7s; }
+    .code-line:nth-child(30) { left: 57%; animation-duration: 12s; animation-delay: 0.4s; }
+    .code-line:nth-child(31) { left: 63%; animation-duration: 9s; animation-delay: 1.4s; }
+    .code-line:nth-child(32) { left: 69%; animation-duration: 13s; animation-delay: 2.5s; }
+    .code-line:nth-child(33) { left: 75%; animation-duration: 10s; animation-delay: 0.6s; }
+    .code-line:nth-child(34) { left: 81%; animation-duration: 11s; animation-delay: 1.7s; }
+    .code-line:nth-child(35) { left: 87%; animation-duration: 8s; animation-delay: 2.3s; }
+    .code-line:nth-child(36) { left: 93%; animation-duration: 12s; animation-delay: 0.9s; }
+    .code-line:nth-child(37) { left: 7%; animation-duration: 10s; animation-delay: 1.5s; }
+    .code-line:nth-child(38) { left: 29%; animation-duration: 9s; animation-delay: 2.9s; }
+    .code-line:nth-child(39) { left: 55%; animation-duration: 13s; animation-delay: 1.1s; }
+    .code-line:nth-child(40) { left: 83%; animation-duration: 10s; animation-delay: 0.8s; }
+
+    .bg-glow {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        /* Purple tinted glows framing the sides and bottom */
+        radial-gradient(800px 400px at 10% 15%, rgba(141, 85, 255, 0.15) 0%, transparent 60%),
+        radial-gradient(800px 400px at 90% 50%, rgba(141, 85, 255, 0.08) 0%, transparent 65%),
+        linear-gradient(180deg, var(--bg-primary) 0%, rgba(141, 85, 255, 0.02) 100%);
+    }
+
+    /* Floating bubbles and cursor glow for additional ambience */
+    @keyframes float {
+      0% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.3; }
+      50% { transform: translate3d(30px, -80px, 0) scale(1.2); opacity: 0.7; }
+      100% { transform: translate3d(-30px, -160px, 0) scale(1); opacity: 0.3; }
+    }
+
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(var(--cyan-rgb), 0.2), rgba(var(--pink-rgb), 0.15));
+      pointer-events: none;
+      filter: blur(20px);
+    }
+
+    .bubble-1 { width: 300px; height: 300px; top: 10%; left: 5%; animation: float 28s linear infinite; }
+    .bubble-2 { width: 220px; height: 220px; top: 60%; left: 70%; animation: float 24s linear infinite; }
+    .bubble-3 { width: 280px; height: 280px; top: 30%; left: 80%; animation: float 32s linear infinite; }
+    .bubble-4 { width: 260px; height: 260px; top: 80%; left: 15%; animation: float 26s linear infinite; }
+    .bubble-5 { width: 200px; height: 200px; top: 45%; left: 50%; animation: float 30s linear infinite; }
+    .bubble-6 { width: 350px; height: 350px; top: 5%; left: 90%; animation: float 34s linear infinite; }
+
+    .cursor-glow {
+      position: fixed;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      pointer-events: none;
+      background: radial-gradient(circle, rgba(var(--cyan-rgb), 0.4) 0%, rgba(var(--pink-rgb), 0.4) 100%);
+      mix-blend-mode: screen;
+      filter: blur(60px);
+      transform: translate(-50%, -50%);
+      z-index: 9;
+      opacity: 0.7;
+    }
+
+    .content {
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Navigation */
+
+    /* Sticky navigation bar: fixed to top so it remains visible on scroll */
+    .nav-wrap {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(15, 20, 25, 0.8);
+      border-bottom: 1px solid var(--line);
+    }
+
+    /* Light theme override: lighten the sticky navigation bar so dark text remains visible */
+    :root[data-theme="light"] .nav-wrap {
+      background: rgba(255, 255, 255, 0.85);
+      border-bottom: 1px solid rgba(12, 21, 42, 0.2);
+    }
+
+/* When cookie banner is visible, push the sticky nav down so it remains below the banner */
+body.cookie-visible .nav-wrap {
+  top: 80px;
+}
+
+    .nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      /* Relative positioning so the mobile menu positions itself below the nav bar */
+      position: relative;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 240px;
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .brand:hover { transform: scale(1.05); }
+
+    .mark {
+      /* Logo container simplified: no outer box; width/height adapt to the SVG */
+      width: auto;
+      height: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      color: var(--bg-primary);
+      position: relative;
+      overflow: visible;
+    }
+
+    .mark::before {
+      /* Hide the rotating conic gradient when the frame is removed */
+      display: none;
+    }
+
+    .mark > * { position: relative; z-index: 1; }
+
+    /* Style the new inline SVG logo. The lightning shape is given a fixed size and a soft pulsing glow to emphasise the brand's energy. */
+    .mark .logo {
+      width: 32px;
+      height: 32px;
+      /* Keep the pulsing animation on the inner logo for subtle dynamism */
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    .brand-text {
+      font-weight: 900;
+      letter-spacing: 2px;
+      /* Helle Variante für das Wortmarke */
+      color: var(--cyan-light);
+      text-transform: uppercase;
+      font-size: 14px;
+    }
+
+    .nav-toggle {
+      display: none;
+      border: 1px solid var(--line);
+      background: var(--bg-secondary);
+      border-radius: var(--radius-md);
+      padding: 10px 12px;
+      cursor: pointer;
+      color: var(--text-primary);
+    }
+
+    .links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: auto;
+      flex-wrap: wrap;
+    }
+
+    .links a {
+      padding: 10px 12px;
+      border-radius: var(--radius-md);
+      color: var(--text-secondary);
+      font-weight: 700;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .links a::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: var(--radius-md);
+      background: rgba(141, 85, 255, 0.08);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+
+    .links a:hover {
+      color: var(--cyan);
+      transform: translateY(-2px);
+    }
+
+    .links a:hover::before { opacity: 1; }
+
+    .links a[aria-current="page"] {
+      color: var(--cyan-light);
+      background: rgba(0, 217, 255, 0.12);
+      box-shadow: var(--glow);
+    }
+
+    .cta-btn {
+      margin-left: 12px;
+      padding: 12px 18px;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(0, 217, 255, 0.4);
+      background: linear-gradient(135deg, rgba(0, 217, 255, 0.2), rgba(0, 217, 255, 0.05));
+      color: var(--cyan);
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: var(--glow);
+    }
+
+    .cta-btn:hover {
+      border-color: var(--cyan);
+      background: linear-gradient(135deg, rgba(0, 217, 255, 0.3), rgba(0, 217, 255, 0.1));
+      box-shadow: var(--glow-intense);
+      transform: translateY(-2px);
+    }
+
+    /* Theme toggle button */
+    .theme-toggle {
+      margin-left: 12px;
+      padding: 12px;
+      border: none;
+      background: transparent;
+      color: var(--cyan);
+      font-size: 20px;
+      cursor: pointer;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+    .theme-toggle:hover {
+      transform: scale(1.2);
+      color: var(--pink);
+    }
+
+    /* Main Content */
+    .main {
+      max-width: 1200px;
+      margin: 0 auto;
+      /* Add top padding equal to nav height to prevent content from being hidden under the fixed nav */
+      padding: 80px 20px 0;
+    }
+
+    .page { display: none; }
+    .page.active { display: block; animation: fadeIn 0.6s ease; }
+
+    /* Hero Section */
+    .hero {
+      padding: 60px 0;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(0, 217, 255, 0.3);
+      background: rgba(0, 217, 255, 0.08);
+      font-weight: 700;
+      font-size: 12px;
+      margin-bottom: 16px;
+      animation: slideDown 0.8s ease;
+    }
+
+    .hero-badge .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: var(--glow);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 6vw, 56px);
+      line-height: 1.15;
+      letter-spacing: -1px;
+      margin: 16px 0 24px;
+      background: linear-gradient(135deg, var(--cyan-light), var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: fadeIn 0.8s ease 0.2s backwards;
+    }
+
+    .hero p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto 32px;
+      line-height: 1.7;
+      animation: fadeIn 0.8s ease 0.4s backwards;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeIn 0.8s ease 0.6s backwards;
+    }
+
+    .btn {
+      padding: 14px 28px;
+      border-radius: var(--radius-md);
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: hidden;
+      border: none;
+      font-size: 14px;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.1);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .btn:hover::before { opacity: 1; }
+
+    .btn-primary {
+      /* Use the brand gradient instead of a fixed cyan to pink blend */
+      background: var(--gradient);
+      color: var(--bg-primary);
+      box-shadow: var(--glow), 0 0 40px rgba(141, 85, 255, 0.2);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--glow-intense), 0 0 60px rgba(141, 85, 255, 0.3);
+    }
+
+    .btn-secondary {
+      border: 1.5px solid rgba(141, 85, 255, 0.4);
+      color: var(--cyan);
+      background: transparent;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(141, 85, 255, 0.1);
+      border-color: var(--cyan);
+      box-shadow: var(--glow);
+      transform: translateY(-3px);
+    }
+
+    /* Cookie banner */
+    .cookie-banner {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      background: var(--bg-tertiary);
+      border-bottom: 1px solid var(--line);
+      box-shadow: var(--shadow-md);
+      z-index: 100;
+      padding: 20px;
+      display: none; /* will be toggled via JS */
+    }
+    .cookie-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+      color: var(--text-secondary);
+    }
+    .cookie-content a {
+      color: var(--cyan);
+      text-decoration: underline;
+    }
+    .cookie-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 12px;
+    }
+    .btn-tertiary {
+      border: none;
+      background: transparent;
+      color: var(--cyan);
+      padding: 12px 20px;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .btn-tertiary:hover {
+      background: rgba(0, 217, 255, 0.1);
+    }
+
+    /* Tools & Labs grid */
+    .tools-grid,
+    .labs-grid {
+      display: grid;
+      /* Use a wider minimum column width to avoid cramped cards on wider screens */
+      /* Increase from 300px to 320px so cards breathe more */
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin: 32px 0 60px;
+    }
+
+    /* Social icons */
+    .social-icons {
+      display: flex;
+      gap: 12px;
+      margin-top: 12px;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+    }
+    .social-icons a {
+      display: inline-block;
+    }
+    .social-icons img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      filter: grayscale(50%) brightness(1.2);
+      transition: all 0.3s ease;
+    }
+    .social-icons img:hover {
+      filter: grayscale(0%) brightness(1);
+      transform: translateY(-4px);
+      box-shadow: var(--glow);
+    }
+
+    /* Scroll progress bar */
+    #scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: var(--cyan);
+      z-index: 100;
+      pointer-events: none;
+    }
+
+    /* Back to top */
+    #back-to-top {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      padding: 10px 14px;
+      border-radius: var(--radius-md);
+      background: var(--bg-secondary);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-md);
+      color: var(--cyan);
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      z-index: 100;
+    }
+    #back-to-top.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stats */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin: 48px 0;
+      animation: fadeIn 0.8s ease 0.8s backwards;
+    }
+
+    .stat-card {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: rgba(26, 31, 46, 0.5);
+      backdrop-filter: blur(10px);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      inset: -100%;
+      background: radial-gradient(circle, rgba(0, 217, 255, 0.1) 0%, transparent 80%);
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+    .stat-card:hover {
+      border-color: rgba(0, 217, 255, 0.5);
+      background: rgba(26, 31, 46, 0.8);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-8px);
+    }
+
+    .stat-card > * { position: relative; z-index: 1; }
+
+    .stat-number {
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--cyan-light);
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-secondary);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    /* Section Header */
+    .section-head {
+      padding: 40px 0 24px;
+      text-align: center;
+    }
+
+    .section-head h2 {
+      font-size: clamp(28px, 4vw, 44px);
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, var(--cyan-light), var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-head p {
+      color: var(--text-secondary);
+      font-size: 16px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Cards */
+    .card {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      /* Use a lighter, semi‑transparent background on cards for a more refined look */
+      /* Lighter card backgrounds for improved contrast on the grey‑blue palette */
+      background: linear-gradient(135deg, rgba(50, 60, 90, 0.5), rgba(50, 60, 90, 0.3));
+      backdrop-filter: blur(10px);
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: hidden;
+      animation: cardReveal 0.6s ease backwards;
+    }
+
+    .card:nth-child(1) { animation-delay: 0.1s; }
+    .card:nth-child(2) { animation-delay: 0.2s; }
+    .card:nth-child(3) { animation-delay: 0.3s; }
+    .card:nth-child(4) { animation-delay: 0.4s; }
+    .card:nth-child(5) { animation-delay: 0.5s; }
+    .card:nth-child(6) { animation-delay: 0.6s; }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      /* Purple halo on hover rather than cyan */
+      background: radial-gradient(600px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(141, 85, 255, 0.1), transparent 80%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .card:hover::before { opacity: 1; }
+
+    .card:hover {
+      border-color: rgba(141, 85, 255, 0.5);
+      /* A darker version of the card gradient on hover */
+      background: linear-gradient(135deg, rgba(40, 55, 90, 0.85), rgba(40, 55, 90, 0.6));
+      box-shadow: var(--shadow-lg), var(--glow);
+      transform: translateY(-12px);
+    }
+
+    .card > * { position: relative; z-index: 1; }
+
+    .card-icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .card h3 {
+      font-size: 18px;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+    }
+
+    .card p {
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .tag {
+      padding: 6px 10px;
+      border-radius: var(--radius-full);
+      background: rgba(141, 85, 255, 0.12);
+      color: var(--cyan-light);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border: 1px solid rgba(141, 85, 255, 0.2);
+    }
+
+    /* Team */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+      margin: 32px 0 60px;
+    }
+
+    .team-card {
+      padding: 32px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, rgba(26, 31, 46, 0.7), rgba(26, 31, 46, 0.4));
+      backdrop-filter: blur(10px);
+      text-align: center;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      animation: cardReveal 0.6s ease backwards;
+    }
+
+    .team-card:nth-child(1) { animation-delay: 0.1s; }
+    .team-card:nth-child(2) { animation-delay: 0.2s; }
+    .team-card:nth-child(3) { animation-delay: 0.3s; }
+
+    .team-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, rgba(141, 85, 255, 0.3), rgba(141, 85, 255, 0.1));
+      border: 2px solid rgba(141, 85, 255, 0.4);
+      display: grid;
+      place-items: center;
+      margin: 0 auto 16px;
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--cyan-light);
+      box-shadow: var(--glow), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .team-card:hover {
+      border-color: rgba(141, 85, 255, 0.5);
+      background: linear-gradient(135deg, rgba(40, 52, 77, 0.9), rgba(40, 52, 77, 0.6));
+      box-shadow: var(--shadow-lg), var(--glow);
+      transform: translateY(-12px);
+    }
+
+    .team-card h3 {
+      font-size: 20px;
+      margin-bottom: 6px;
+      color: var(--text-primary);
+    }
+
+    .team-role {
+      color: var(--cyan-light);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    /* Red tag to highlight management members (Geschäftsführung) */
+    .team-tag {
+      display: inline-block;
+      background: rgba(255, 77, 77, 0.08);
+      color: #ff4d4d;
+      border: 1px solid rgba(255, 77, 77, 0.4);
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-top: 4px;
+      text-transform: uppercase;
+    }
+
+    .team-bio {
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .team-details {
+      display: grid;
+      gap: 12px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+    }
+
+    .detail-item {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .detail-label {
+      color: var(--text-muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .team-socials {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 16px;
+    }
+
+    .social-link {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--line);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: var(--text-secondary);
+      font-size: 16px;
+    }
+
+    .social-link:hover {
+      border-color: rgba(141, 85, 255, 0.4);
+      color: var(--cyan);
+      background: rgba(0, 217, 255, 0.1);
+      box-shadow: var(--glow);
+    }
+
+    /* Portfolio */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+      margin: 32px 0 60px;
+    }
+
+    .portfolio-item {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: linear-gradient(135deg, rgba(26, 31, 46, 0.6), rgba(26, 31, 46, 0.3));
+      backdrop-filter: blur(10px);
+      transition: all 0.4s ease;
+      cursor: pointer;
+      animation: cardReveal 0.6s ease backwards;
+    }
+
+    .portfolio-item:nth-child(1) { animation-delay: 0.1s; }
+    .portfolio-item:nth-child(2) { animation-delay: 0.2s; }
+    .portfolio-item:nth-child(3) { animation-delay: 0.3s; }
+
+    .portfolio-image {
+      width: 100%;
+      aspect-ratio: 16/10;
+      background: linear-gradient(135deg, rgba(0, 217, 255, 0.2), rgba(0, 217, 255, 0.05));
+      display: grid;
+      place-items: center;
+      font-size: 48px;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .portfolio-image::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 217, 255, 0.15), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .portfolio-item:hover .portfolio-image::before { opacity: 1; }
+
+    .portfolio-item:hover .portfolio-image {
+      transform: scale(1.05);
+    }
+
+    .portfolio-content {
+      padding: 28px;
+    }
+
+    .portfolio-tag {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: var(--radius-full);
+      background: rgba(0, 217, 255, 0.12);
+      color: var(--cyan-light);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+      border: 1px solid rgba(0, 217, 255, 0.2);
+    }
+
+    .portfolio-item h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: var(--text-primary);
+    }
+
+    .portfolio-desc {
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    .portfolio-metrics {
+      display: flex;
+      gap: 16px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+
+    .metric {
+      flex: 1;
+    }
+
+    .metric-value {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--cyan-light);
+    }
+
+    .metric-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .portfolio-item:hover {
+      border-color: rgba(0, 217, 255, 0.5);
+      background: linear-gradient(135deg, rgba(26, 31, 46, 0.8), rgba(26, 31, 46, 0.5));
+      box-shadow: var(--shadow-lg), var(--glow);
+      transform: translateY(-12px);
+    }
+
+    /* Competence */
+    .competence-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin: 32px 0;
+    }
+
+    .competence-card {
+      padding: 32px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, rgba(26, 31, 46, 0.6), rgba(26, 31, 46, 0.3));
+      backdrop-filter: blur(10px);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      animation: cardReveal 0.6s ease backwards;
+      cursor: pointer;
+    }
+
+    .competence-card:nth-child(1) { animation-delay: 0.1s; }
+    .competence-card:nth-child(2) { animation-delay: 0.2s; }
+    .competence-card:nth-child(3) { animation-delay: 0.3s; }
+    .competence-card:nth-child(4) { animation-delay: 0.4s; }
+    .competence-card:nth-child(5) { animation-delay: 0.5s; }
+    .competence-card:nth-child(6) { animation-delay: 0.6s; }
+
+    .competence-card.expanded {
+      grid-column: 1 / -1;
+      padding: 40px;
+    }
+
+    .competence-card.expanded .competence-expanded {
+      max-height: 500px;
+      opacity: 1;
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+    }
+
+    .competence-expanded {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: all 0.4s ease;
+    }
+
+    .competence-details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .detail-box {
+      padding: 20px;
+      background: rgba(0, 217, 255, 0.05);
+      border: 1px solid rgba(0, 217, 255, 0.15);
+      border-radius: var(--radius-md);
+    }
+
+    .detail-box h4 {
+      color: var(--cyan-light);
+      margin-bottom: 12px;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .detail-box ul {
+      display: grid;
+      gap: 8px;
+    }
+
+    .detail-box li {
+      color: var(--text-secondary);
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .detail-box li::before {
+      content: '→';
+      color: var(--cyan);
+      font-weight: bold;
+    }
+
+    .competence-icon {
+      font-size: 40px;
+      margin-bottom: 16px;
+    }
+
+    .competence-card h3 {
+      font-size: 18px;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+    }
+
+    .competence-desc {
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .competence-features {
+      display: grid;
+      gap: 8px;
+    }
+
+    .feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .feature::before {
+      content: '✓';
+      color: var(--cyan-light);
+      font-weight: 900;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .competence-card:hover {
+      border-color: rgba(0, 217, 255, 0.5);
+      background: linear-gradient(135deg, rgba(26, 31, 46, 0.8), rgba(26, 31, 46, 0.5));
+      box-shadow: var(--shadow-lg), var(--glow);
+      transform: translateY(-12px);
+    }
+
+    /* Pricing */
+    .pricing-note {
+      text-align: center;
+      padding: 32px;
+      border: 2px solid rgba(0, 217, 255, 0.2);
+      border-radius: var(--radius-lg);
+      background: rgba(0, 217, 255, 0.05);
+      margin: 32px 0;
+    }
+
+    .pricing-note h3 {
+      font-size: 20px;
+      color: var(--cyan-light);
+      margin-bottom: 12px;
+    }
+
+    .pricing-note p {
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto 20px;
+    }
+
+    /* Contact Form */
+    .contact-form {
+      max-width: 700px;
+      margin: 32px auto;
+      padding: 40px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, rgba(26, 31, 46, 0.6), rgba(26, 31, 46, 0.3));
+      backdrop-filter: blur(10px);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      color: var(--text-primary);
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .form-input,
+    .form-textarea,
+    .form-select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: rgba(26, 31, 46, 0.5);
+      color: var(--text-primary);
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus,
+    .form-select:focus {
+      outline: none;
+      border-color: rgba(0, 217, 255, 0.6);
+      background: rgba(26, 31, 46, 0.8);
+      box-shadow: var(--glow);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 120px;
+      font-family: var(--font-sans);
+    }
+
+    .form-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .form-checkbox input {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      accent-color: var(--cyan);
+    }
+
+    .form-checkbox label {
+      color: var(--text-secondary);
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 80px;
+      padding: 60px 20px 40px;
+      border-top: 1px solid var(--line);
+      background: rgba(15, 20, 25, 0.5);
+    }
+
+    .footer-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-col h4 {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .footer-col ul {
+      display: grid;
+      gap: 12px;
+    }
+
+    .footer-col a {
+      color: var(--text-secondary);
+      font-size: 13px;
+      transition: all 0.3s ease;
+    }
+
+    .footer-col a:hover {
+      color: var(--cyan);
+    }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* Modals */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      backdrop-filter: blur(5px);
+      background: rgba(0, 0, 0, 0.6);
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal.open {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-content {
+      max-width: 600px;
+      width: 100%;
+      background: var(--bg-secondary);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow-lg), var(--glow);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .modal-header h2 {
+      color: var(--cyan-light);
+      margin: 0;
+    }
+
+    .modal-close {
+      border: none;
+      background: none;
+      color: var(--text-secondary);
+      font-size: 24px;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .modal-close:hover {
+      color: var(--cyan);
+    }
+
+    .modal-body {
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    .modal-body h3 {
+      color: var(--text-primary);
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    .modal-body ul {
+      margin-left: 20px;
+      display: grid;
+      gap: 8px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav {
+        padding: 12px 16px;
+      }
+
+
+      .brand {
+        min-width: auto;
+      }
+
+      /* Mobile links: dropdown panel below the nav bar */
+      .links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+        padding: 16px;
+        background: var(--bg-secondary);
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        box-shadow: var(--shadow-lg);
+        z-index: 40;
+      }
+
+      .links.open {
+        display: flex;
+      }
+
+      /* Ensure the burger button appears above the menu overlay */
+      .nav-toggle {
+        display: inline-flex;
+        z-index: 50;
+      }
+
+      .cta-btn {
+        margin-left: 0;
+      }
+
+      .team-grid,
+      .portfolio-grid,
+      .competence-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 40px 0;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .contact-form {
+        padding: 24px;
+      }
+
+      .footer-grid {
+        gap: 24px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- COOKIE BANNER -->
+  <div id="cookie-banner" class="cookie-banner" style="display:none;">
+    <div class="cookie-content">
+      <p>Wir nutzen Cookies, um dein Erlebnis zu verbessern. Mehr Infos findest du in unserer <a href="#" data-modal="cookies">Cookie-Richtlinie</a>.</p>
+      <div class="cookie-actions">
+        <button class="btn btn-primary" id="cookie-accept">Akzeptieren</button>
+        <button class="btn btn-secondary" id="cookie-decline">Ablehnen</button>
+        <button class="btn btn-tertiary" data-modal="cookies" id="cookie-info">Mehr Infos</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCROLL PROGRESS BAR -->
+  <div id="scroll-progress"></div>
+
+  <!-- BACKGROUND ANIMATIONS -->
+  <div class="bg-animate">
+    <div class="code-line">const web = new Innovation();</div>
+    <div class="code-line">function buildMagic() { return success; }</div>
+    <div class="code-line">const frontend = { clean: true, fast: true };</div>
+    <div class="code-line">if (design === 'pixel-perfect') { ship(); }</div>
+    <div class="code-line">const backend = new Performance();</div>
+    <div class="code-line">app.deploy({ quality: 'A+' });</div>
+    <div class="code-line">{ seo: true, performance: true, security: true }</div>
+    <div class="code-line">const success = await buildProject();</div>
+    <div class="code-line">team.push(innovation, passion, clarity);</div>
+    <div class="code-line">export default NobleFrame;</div>
+    <!-- Additional falling code lines for a more dynamic background -->
+    <div class="code-line">const ui = require('magic-ui');</div>
+    <div class="code-line">let darkMode = theme === 'dark';</div>
+    <div class="code-line">function iterateGrowth() { clients++; }</div>
+    <div class="code-line">const labs = runExperiments();</div>
+    <div class="code-line">performance.now() &gt; threshold &amp;&amp; optimize();</div>
+    <div class="code-line">let features = ['audit','pricing','brief'];</div>
+    <div class="code-line">const contact = () =&gt; sendMessage();</div>
+    <div class="code-line">if (cookieConsent) { analytics.init(); }</div>
+    <div class="code-line">for (const tool of features) { play(tool); }</div>
+    <div class="code-line">return "NextGen";</div>
+    <!-- More code lines for extra movement -->
+    <div class="code-line">async function magic() { return '✨'; }</div>
+    <div class="code-line">const cyanColor = '#00d4ff';</div>
+    <div class="code-line">const pinkColor = '#ff006e';</div>
+    <div class="code-line">const greyBlue = '#16294a';</div>
+    <div class="code-line">const newBrand = 'NobleFrame';</div>
+    <div class="code-line">for (let i=0; i&lt;10; i++) { console.log('NobleFrame'); }</div>
+    <div class="code-line">function designPro() { return gradients(); }</div>
+    <div class="code-line">const team = ['Nico','Tobi'];</div>
+    <div class="code-line">let tag = 'Geschäftsführung';</div>
+    <div class="code-line">if (quality &gt; 9000) { ship(); }</div>
+    <!-- Extra lines for richer code animation -->
+    <div class="code-line">const brandColors = { primary: '#00d4ff', accent: '#ff006e' };</div>
+    <div class="code-line">if (mobile) { nav.toggle(); }</div>
+    <div class="code-line">for (const l of codeLines) { animate(l); }</div>
+    <div class="code-line">const experiment = runTests();</div>
+    <div class="code-line">return 'NextGeneration';</div>
+    <!-- Additional lines to enrich the code rain and reflect more NobleFrame functions -->
+    <div class="code-line">const nobleFrame = () =&gt; 'Infinite Creativity';</div>
+    <div class="code-line">await deploy('NobleFrame', { scale: 'mobile-first' });</div>
+    <div class="code-line">while (!satisfied) { iterateDesign(); }</div>
+    <div class="code-line">const smoothScroll = () =&gt; window.scroll({ top: 0, behavior: 'smooth' });</div>
+    <div class="code-line">function toggleBurger() { links.classList.toggle('open'); }</div>
+    <div class="code-line">console.debug('Design polished &amp; responsive');</div>
+    <div class="code-line">const randomQuote = quotes[Math.floor(Math.random()*quotes.length)];</div>
+    <div class="code-line">themeToggleBtn?.click();</div>
+    <div class="code-line">console.info('NobleFrame loaded');</div>
+    <div class="code-line">document.documentElement.dataset.brand = 'NobleFrame';</div>
+    <!-- Floating bubbles for enhanced ambient animation -->
+    <div class="bubble bubble-1"></div>
+    <div class="bubble bubble-2"></div>
+    <div class="bubble bubble-3"></div>
+    <div class="bubble bubble-4"></div>
+    <div class="bubble bubble-5"></div>
+    <div class="bubble bubble-6"></div>
+  </div>
+  <div class="bg-glow"></div>
+
+  <!-- CONTENT -->
+  <div class="content">
+    <!-- NAVIGATION -->
+    <header class="nav-wrap">
+      <nav class="nav">
+        <a class="brand" href="#home" data-nav="home">
+          <div class="mark">
+            <!-- NobleFrame logo: crosshair square with circle and pulsing diamond -->
+            <svg class="logo" viewBox="0 0 50 50" width="40" height="40" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <!-- Gradient definitions specifically for the nav logo to avoid ID collisions -->
+                <linearGradient id="nav-gradientStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#00d4ff" stop-opacity="1" />
+                  <stop offset="100%" stop-color="#ff006e" stop-opacity="1" />
+                </linearGradient>
+                <linearGradient id="nav-gradientFill" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.8" />
+                  <stop offset="100%" stop-color="#ff006e" stop-opacity="0.8" />
+                </linearGradient>
+              </defs>
+              <!-- Counter rotating circle outline surrounding the diamond -->
+              <g class="nav-animate2" style="animation: rotateCCW 4.5s linear infinite; transform-origin: 25px 25px;">
+                <circle cx="25" cy="25" r="14" stroke="url(#nav-gradientStroke)" stroke-width="2.5" fill="none"
+                        stroke-dasharray="88"
+                        filter="drop-shadow(0 0 10px rgba(0, 212, 255, 0.5))"/>
+              </g>
+              <!-- Pulsing diamond -->
+              <g class="nav-animate3" style="animation: pulseBig 2s ease-in-out infinite;">
+                <polygon points="25,18 30,25 25,32 20,25" fill="url(#nav-gradientFill)"
+                         filter="drop-shadow(0 0 12px rgba(255, 0, 110, 0.8))"/>
+              </g>
+            </svg>
+          </div>
+          <span class="brand-text">NobleFrame</span>
+        </a>
+
+        <!-- Burger menu button: fixed invalid attribute syntax -->
+        <button class="nav-toggle" type="button" data-toggle-nav>☰</button>
+
+        <ul class="links" data-links>
+          <li><a href="#home" data-nav="home">Home</a></li>
+          <li><a href="#kompetenzen" data-nav="kompetenzen">Kompetenzen</a></li>
+          <li><a href="#portfolio" data-nav="portfolio">Portfolio</a></li>
+          <li><a href="#team" data-nav="team">Team</a></li>
+          <li><a href="#contact" data-nav="contact">Kontakt</a></li>
+          <li><a href="#tools" data-nav="tools">Tools</a></li>
+          <li><a href="#labs" data-nav="labs">Labs</a></li>
+        </ul>
+
+        <button class="cta-btn" data-nav="contact">Termin buchen →</button>
+        <!-- Theme toggle: switch between dark and light mode -->
+        <button class="theme-toggle" type="button" aria-label="Theme toggle">🌓</button>
+      </nav>
+    </header>
+
+    <!-- MAIN -->
+    <main class="main">
+      <!-- HOME -->
+      <section id="home" class="page active" data-page="home">
+        <div class="hero">
+          <div class="hero-badge">
+            <span class="dot"></span>
+            Full-Stack Digital Innovation
+          </div>
+
+          <h1>Websites, Apps & Growth<br>mit Präzision gebaut</h1>
+
+          <p>Wir kombinieren Clean Code mit intelligenter UX. Keine Kompromisse bei Performance, Security oder Design. Dein Business – unsere Technologie.</p>
+
+          <div class="cta-group">
+            <button class="btn btn-primary" data-nav="contact">Lass uns reden</button>
+            <button class="btn btn-secondary" data-nav="kompetenzen">Unser Know-How</button>
+          </div>
+
+          <div class="stats">
+            <div class="stat-card">
+              <div class="stat-number">120+</div>
+              <div class="stat-label">Projekte</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">98%</div>
+              <div class="stat-label">Client Zufriedenheit</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">8 Jahre</div>
+              <div class="stat-label">Expertise</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">24/7</div>
+              <div class="stat-label">Support</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TOOLS -->
+      <section id="tools" class="page" data-page="tools">
+        <div class="section-head">
+          <h2>Tools</h2>
+          <p>Nutze unsere kostenlosen Tools für Audit, Budget und Content.</p>
+        </div>
+        <div class="tools-grid">
+          <div class="card">
+            <div class="card-icon"><span class="code-icon">&lt;Audit/&gt;</span></div>
+            <h3>Website Audit</h3>
+            <p>Finde in wenigen Minuten die Performance- und UX‑Schwachstellen deiner Website.</p>
+            <!-- Öffnet den Audit‑Wizard mit Parameter (nur Audit) in einem neuen Tab -->
+            <a class="btn btn-primary" href="labs.html?tool=audit" target="_blank" rel="noopener">Audit starten</a>
+          </div>
+          <div class="card">
+            <div class="card-icon"><span class="code-icon">&lt;ROI/&gt;</span></div>
+            <h3>ROI &amp; Budget Kalkulator</h3>
+            <p>Schätze, wie viel dein Projekt kostet und welchen Return du erwarten kannst.</p>
+            <!-- Öffnet den ROI‑Kalkulator mit Parameter (nur ROI) in einem neuen Tab -->
+            <a class="btn btn-primary" href="labs.html?tool=roi" target="_blank" rel="noopener">Kalkulieren</a>
+          </div>
+          <div class="card">
+            <div class="card-icon"><span class="code-icon">&lt;Brief/&gt;</span></div>
+            <h3>Briefing‑Generator</h3>
+            <p>Erstelle in 5 Minuten dein perfektes Projekt‑Briefing – strukturiert und komplett.</p>
+            <!-- Öffnet den Briefing‑Generator mit Parameter (nur Brief) in einem neuen Tab -->
+            <a class="btn btn-primary" href="labs.html?tool=brief" target="_blank" rel="noopener">Briefing erstellen</a>
+          </div>
+
+          <!-- Inspiration Generator -->
+          <div class="card">
+            <div class="card-icon"><span class="code-icon">&lt;Inspire/&gt;</span></div>
+            <h3>Inspiration&nbsp;Generator</h3>
+            <p>Erhalte zufällige Inspirationen oder Motivationssprüche zum Coden.</p>
+            <button class="btn btn-primary" type="button" data-modal="tool-inspire">Inspirieren lassen</button>
+          </div>
+
+          <!-- Code Rain Settings -->
+          <div class="card">
+            <div class="card-icon"><span class="code-icon">&lt;Settings/&gt;</span></div>
+            <h3>Code Rain&nbsp;Settings</h3>
+            <p>Steuer die Geschwindigkeit und das Verhalten des Code‑Regens in Echtzeit.</p>
+            <button class="btn btn-primary" type="button" data-modal="tool-settings">Anpassen</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- LABS -->
+      <section id="labs" class="page" data-page="labs">
+        <div class="section-head">
+          <h2>Labs</h2>
+          <p>Experimente, Freebies & kleine Maschinenräume – für Developer und Marketeers.</p>
+        </div>
+        <div class="labs-grid">
+          <div class="card">
+            <div class="card-icon"><span class="code-icon">&lt;Wizard/&gt;</span></div>
+            <h3>Audit &amp; Pricing Wizard</h3>
+            <p>Unser All‑in‑One Tool: Audit, Budget &amp; Briefing in einem.</p>
+            <button class="btn btn-primary" type="button" data-modal="tool-audit">Los geht's</button>
+          </div>
+          <div class="card">
+            <div class="card-icon"><span class="code-icon">&lt;UX/&gt;</span></div>
+            <h3>UX Copy Prompter</h3>
+            <p>Schnelle Text‑Varianten generieren – wähle Tonalität &amp; Zielgruppe.</p>
+            <button class="btn btn-secondary" type="button" data-modal="coming-soon">Coming Soon</button>
+          </div>
+          <div class="card">
+            <div class="card-icon"><span class="code-icon">&lt;Palette/&gt;</span></div>
+            <h3>Farbpalette Builder</h3>
+            <p>Kreiere in Sekunden Farbschemata, exportiere CSS Variablen.</p>
+            <button class="btn btn-secondary" type="button" data-modal="coming-soon">Coming Soon</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- KOMPETENZEN -->
+      <section id="kompetenzen" class="page" data-page="kompetenzen">
+        <div class="section-head">
+          <h2>Unser Know-How</h2>
+          <p>Was wir wirklich gut können – Detailliert erklärt.</p>
+        </div>
+
+        <div class="competence-grid">
+          <div class="competence-card">
+            <div class="competence-icon"><span class="code-icon">&lt;UI/&gt;</span></div>
+            <h3>Frontend & UX Design</h3>
+            <p class="competence-desc">Pixel-perfekt. Responsive. Schnell.</p>
+            <!-- Hidden expanded details that reveal on card click -->
+            <div class="competence-expanded">
+              <div class="feature">Modern HTML/CSS/JavaScript (ES6+)</div>
+              <div class="feature">React, Vue, Svelte professionell</div>
+              <div class="feature">Mobile-First Design</div>
+              <div class="feature">A11y & WCAG 2.1 AA+</div>
+              <div class="feature">Web Performance Optimization</div>
+              <div class="feature">Figma → Code Pipeline</div>
+            </div>
+          </div>
+
+          <div class="competence-card">
+            <div class="competence-icon"><span class="code-icon">&lt;API/&gt;</span></div>
+            <h3>Backend & APIs</h3>
+            <p class="competence-desc">Skalierbar. Sicher. Effizient.</p>
+            <!-- Hidden expanded details that reveal on card click -->
+            <div class="competence-expanded">
+              <div class="feature">Node.js / Express / NestJS</div>
+              <div class="feature">Serverless (AWS Lambda, Vercel)</div>
+              <div class="feature">REST & GraphQL APIs</div>
+              <div class="feature">Datenbank-Design (SQL & NoSQL)</div>
+              <div class="feature">Authentication & Security</div>
+              <div class="feature">DevOps & CI/CD Pipelines</div>
+            </div>
+          </div>
+
+          <div class="competence-card">
+            <div class="competence-icon"><span class="code-icon">&lt;Shop/&gt;</span></div>
+            <h3>E-Commerce Solutions</h3>
+            <p class="competence-desc">Von Warenkorb bis Versand-Integration.</p>
+            <!-- Hidden expanded details that reveal on card click -->
+            <div class="competence-expanded">
+              <div class="feature">Shopify & WooCommerce Setup</div>
+              <div class="feature">Custom Shop-Entwicklung</div>
+              <div class="feature">Payment Gateway Integration</div>
+              <div class="feature">Inventory Management</div>
+              <div class="feature">Conversion Rate Optimization</div>
+              <div class="feature">Multi-Channel Sales</div>
+            </div>
+          </div>
+
+          <div class="competence-card">
+            <div class="competence-icon"><span class="code-icon">&lt;SEO/&gt;</span></div>
+            <h3>SEO & Growth Hacking</h3>
+            <p class="competence-desc">Sichtbar. Messbar. Profitable.</p>
+            <!-- Hidden expanded details that reveal on card click -->
+            <div class="competence-expanded">
+              <div class="feature">Technical SEO Audits</div>
+              <div class="feature">On-Page & Off-Page Optimization</div>
+              <div class="feature">Google Analytics 4 & Tracking Setup</div>
+              <div class="feature">A/B Testing & Conversion Funnels</div>
+              <div class="feature">Keyword Research & Content Strategy</div>
+              <div class="feature">Paid Ads Setup (Google, Meta)</div>
+            </div>
+          </div>
+
+          <div class="competence-card">
+            <div class="competence-icon"><span class="code-icon">&lt;Sec/&gt;</span></div>
+            <h3>Security & Infrastructure</h3>
+            <p class="competence-desc">Verschlüsselt. Überwacht. Gebackupped.</p>
+            <!-- Hidden expanded details that reveal on card click -->
+            <div class="competence-expanded">
+              <div class="feature">SSL/TLS Certificates & HTTPS</div>
+              <div class="feature">OWASP Top 10 Security</div>
+              <div class="feature">Database Encryption</div>
+              <div class="feature">DDoS Protection</div>
+              <div class="feature">Automated Backups & Disaster Recovery</div>
+              <div class="feature">Security Audits & Penetration Testing</div>
+            </div>
+          </div>
+
+          <div class="competence-card">
+            <div class="competence-icon"><span class="code-icon">&lt;Auto/&gt;</span></div>
+            <h3>Automation & Integration</h3>
+            <p class="competence-desc">Workflows, die sich selbst laufen.</p>
+            <!-- Hidden expanded details that reveal on card click -->
+            <div class="competence-expanded">
+              <div class="feature">Zapier & Make.com Workflows</div>
+              <div class="feature">API Integration & Middleware</div>
+              <div class="feature">CRM, ERP, Billing-Systeme</div>
+              <div class="feature">Scheduled Tasks & Background Jobs</div>
+              <div class="feature">Email Marketing Automation</div>
+              <div class="feature">RPA & Custom Scripts</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PORTFOLIO -->
+      <section id="portfolio" class="page" data-page="portfolio">
+        <div class="section-head">
+          <h2>Projekte</h2>
+          <p>Was wir gebaut haben – Real World Case Studies.</p>
+        </div>
+
+        <div class="portfolio-grid">
+          <div class="portfolio-item">
+            <div class="portfolio-image"><span class="code-icon">&lt;Shop/&gt;</span></div>
+            <div class="portfolio-content">
+              <span class="portfolio-tag">E-Commerce</span>
+              <h3>Luxus Schmuck Shop</h3>
+              <p class="portfolio-desc">Custom Shop auf Shopify. Magento-Migration. Product Showcase mit AR-Viewer.</p>
+              <div class="portfolio-metrics">
+                <div class="metric">
+                  <div class="metric-value">+340%</div>
+                  <div class="metric-label">Umsatz</div>
+                </div>
+                <div class="metric">
+                  <div class="metric-value">2.8s</div>
+                  <div class="metric-label">LCP</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="portfolio-item">
+            <div class="portfolio-image"><span class="code-icon">&lt;Dash/&gt;</span></div>
+            <div class="portfolio-content">
+              <span class="portfolio-tag">Saas</span>
+              <h3>Analytics Dashboard</h3>
+              <p class="portfolio-desc">React + Node.js SaaS Platform. Real-Time Daten-Visualisierung. Team Collaboration Features.</p>
+              <div class="portfolio-metrics">
+                <div class="metric">
+                  <div class="metric-value">50K+</div>
+                  <div class="metric-label">User</div>
+                </div>
+                <div class="metric">
+                  <div class="metric-value">99.9%</div>
+                  <div class="metric-label">Uptime</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="portfolio-item">
+            <div class="portfolio-image"><span class="code-icon">&lt;Fin/&gt;</span></div>
+            <div class="portfolio-content">
+              <span class="portfolio-tag">Startup</span>
+              <h3>Fintech Mobile App</h3>
+              <p class="portfolio-desc">React Native Cross-Platform. Banking API Integration. Security Audit bestanden.</p>
+              <div class="portfolio-metrics">
+                <div class="metric">
+                  <div class="metric-value">4.8⭐</div>
+                  <div class="metric-label">App Store</div>
+                </div>
+                <div class="metric">
+                  <div class="metric-value">100K</div>
+                  <div class="metric-label">Downloads</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="portfolio-item">
+            <div class="portfolio-image"><span class="code-icon">&lt;B2B/&gt;</span></div>
+            <div class="portfolio-content">
+              <span class="portfolio-tag">Corporate</span>
+              <h3>B2B Portal Relaunch</h3>
+              <p class="portfolio-desc">Legacy Modernisierung. Neue UX. Integriertes CRM + ERP System.</p>
+              <div class="portfolio-metrics">
+                <div class="metric">
+                  <div class="metric-value">-60%</div>
+                  <div class="metric-label">Load Time</div>
+                </div>
+                <div class="metric">
+                  <div class="metric-value">A+</div>
+                  <div class="metric-label">Lighthouse</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="portfolio-item">
+            <div class="portfolio-image"><span class="code-icon">&lt;Edu/&gt;</span></div>
+            <div class="portfolio-content">
+              <span class="portfolio-tag">Edutech</span>
+              <h3>Online Learning Platform</h3>
+              <p class="portfolio-desc">Nextjs + Stripe. Video Streaming. User Onboarding Automations.</p>
+              <div class="portfolio-metrics">
+                <div class="metric">
+                  <div class="metric-value">10K+</div>
+                  <div class="metric-label">Stundent</div>
+                </div>
+                <div class="metric">
+                  <div class="metric-value">$50K/Monat</div>
+                  <div class="metric-label">MRR</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="portfolio-item">
+            <div class="portfolio-image"><span class="code-icon">&lt;AI/&gt;</span></div>
+            <div class="portfolio-content">
+              <span class="portfolio-tag">AI Tools</span>
+              <h3>AI Content Generator</h3>
+              <p class="portfolio-desc">OpenAI Integration. Prompt Engineering. Usage Tracking & Billing.</p>
+              <div class="portfolio-metrics">
+                <div class="metric">
+                  <div class="metric-value">$15K/Monat</div>
+                  <div class="metric-label">ARR</div>
+                </div>
+                <div class="metric">
+                  <div class="metric-value">5K+</div>
+                  <div class="metric-label">Aktive User</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TEAM -->
+      <section id="team" class="page" data-page="team">
+        <div class="section-head">
+          <h2>Unser Team</h2>
+          <p>Menschen hinter dem Code. Leidenschaft trifft Expertise.</p>
+        </div>
+
+        <div class="team-grid">
+          <div class="team-card">
+            <div class="team-avatar">NZ</div>
+            <h3>Nico Zimmermann</h3>
+            <div class="team-role">Founder & Full-Stack Developer</div>
+  <div class="team-tag">Geschäftsführung</div>
+            <p class="team-bio">Experte für Qualitätsmanagement, IT-Systeme und Software-Design.
+Langjährige Erfahrung bei WestfalenLand Fleischwaren im Bereich QM/IT.
+Spezialisiert auf Prozessoptimierung, User Experience und digitale Innovation.</p>
+            <div class="team-details">
+              <div class="detail-item">
+                <span class="detail-label">Expertise</span>
+                React, Node.js, DevOps, System Architecture
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Leidenschaft</span>
+                Startups, SaaS, Automatisierung
+              </div>
+            </div>
+          </div>
+
+          <div class="team-card">
+            <div class="team-avatar">TB</div>
+            <h3>Tobias Bunnefeld</h3>
+            <div class="team-role">Growth & Marketing Lead</div>
+  <div class="team-tag">Geschäftsführung</div>
+            <p class="team-bio">5 Jahre Digital Marketing & Growth Hacking. Google Ads Zertifikat. Spezialist für Funnels, Conversion Rate Optimization und Data-Driven Decision Making. Hat 30+ Unternehmen zu 5-stelligen Umsätzen geholfen.</p>
+            <div class="team-details">
+              <div class="detail-item">
+                <span class="detail-label">Expertise</span>
+                SEO, Paid Ads, Analytics, Automation
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Leidenschaft</span>
+                E-Commerce, Growth Loops
+              </div>
+            </div>
+          </div>
+
+          <!-- Partner & Collaborators card removed as requested -->
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" class="page" data-page="contact">
+        <div class="section-head">
+          <h2>Lass uns zusammenarbeiten</h2>
+          <p>Dein Projekt. Unsere Expertise. Echte Ergebnisse.</p>
+        </div>
+
+        <div class="pricing-note">
+          <h3>Preise nach Beratung</h3>
+          <p>Jedes Projekt ist einzigartig. Statt Standard-Pakete: Wir hören zu, analysieren deine Anforderungen und schnüren ein maßgeschneidertes Angebot mit transparentem Budget.</p>
+          <p>Typische Range: 5.000€ – 50.000€+</p>
+        </div>
+
+        <form class="contact-form" data-contact-form>
+          <div class="form-group">
+            <label class="form-label" for="name">Dein Name *</label>
+            <input class="form-input" id="name" name="name" type="text" required placeholder="Max Mustermann" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="email">E-Mail *</label>
+            <input class="form-input" id="email" name="email" type="email" required placeholder="max@example.com" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="company">Unternehmen</label>
+            <input class="form-input" id="company" name="company" type="text" placeholder="Deine Firma (optional)" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="project">Projektbeschreibung *</label>
+            <textarea class="form-textarea" id="project" name="project" required placeholder="Was möchtest du bauen? Kurz beschreiben..."></textarea>
+          </div>
+
+      <!-- Neue Felder: Präferenzen zur Erreichbarkeit -->
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="time">Bevorzugte Tageszeit</label>
+          <select class="form-select" id="time" name="time">
+            <option value="">Keine Präferenz</option>
+            <option value="morning">Morgens (08–12 Uhr)</option>
+            <option value="midday">Mittags (12–15 Uhr)</option>
+            <option value="afternoon">Nachmittags (15–18 Uhr)</option>
+            <option value="evening">Abends (18–21 Uhr)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="daypref">Bevorzugter Tag</label>
+          <select class="form-select" id="daypref" name="daypref">
+            <option value="">Keine Präferenz</option>
+            <option value="weekday">Unter der Woche</option>
+            <option value="weekend">Am Wochenende</option>
+            <option value="any">Egal</option>
+          </select>
+        </div>
+      </div>
+
+          <div class="form-group">
+            <label class="form-label" for="budget">Budget-Vorstellung</label>
+            <select class="form-select" id="budget" name="budget">
+              <option value="">Nicht angegeben</option>
+              <option value="<5k">&lt; 5.000 €</option>
+              <option value="5-10k">5.000 – 10.000 €</option>
+              <option value="10-25k">10.000 – 25.000 €</option>
+              <option value="25-50k">25.000 – 50.000 €</option>
+              <option value=">50k">&gt; 50.000 €</option>
+            </select>
+          </div>
+
+          
+
+          <div class="form-checkbox">
+            <input id="privacy" name="privacy" type="checkbox" required />
+            <label for="privacy">Ich akzeptiere die Datenschutzerklärung</label>
+          </div>
+
+          <button class="btn btn-primary" type="submit" style="width: 100%;">Anfrage senden</button>
+          <p style="margin: 8px 0 0; font-size: 12px; color: var(--text-secondary);" data-form-status></p>
+        </form>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>NobleFrame</h4>
+          <p style="color: var(--text-secondary); font-size: 13px;">Full-Stack Digital Innovation. Websites, Apps, Growth.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="#home" data-nav="home">Home</a></li>
+            <li><a href="#kompetenzen" data-nav="kompetenzen">Kompetenzen</a></li>
+            <li><a href="#portfolio" data-nav="portfolio">Portfolio</a></li>
+            <li><a href="#team" data-nav="team">Team</a></li>
+            <li><a href="#contact" data-nav="contact">Kontakt</a></li>
+            <li><a href="#tools" data-nav="tools">Tools</a></li>
+            <li><a href="#labs" data-nav="labs">Labs</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Kontakt</h4>
+          <ul>
+            <li><a href="mailto:info@nobleframe.de">info@nobleframe.de</a></li>
+            <li><a href="tel:+49 152 92612795">+49 152 92612795</a></li>
+            <li><a href="https://wa.me/+4915292612795">WhatsApp</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="javascript:void(0)" role="button" data-modal="impressum">Impressum</a></li>
+            <li><a href="javascript:void(0)" role="button" data-modal="datenschutz">Datenschutz</a></li>
+            <li><a href="javascript:void(0)" role="button" data-modal="agb">AGB</a></li>
+            <li><a href="javascript:void(0)" role="button" data-modal="cookies">Cookie-Richtlinie</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Newsletter &amp; Social</h4>
+          <form class="newsletter-form" data-newsletter-form style="margin-bottom:12px;">
+            <div class="form-group">
+              <label class="form-label" for="newsletter-email">E-Mail *</label>
+              <input class="form-input" id="newsletter-email" name="email" type="email" required placeholder="deine@adresse.de" />
+            </div>
+            <div class="form-checkbox">
+              <input id="newsletter-privacy" name="privacy" type="checkbox" required />
+              <label for="newsletter-privacy">Ich akzeptiere die Datenschutzerklärung</label>
+            </div>
+            <button class="btn btn-primary" type="submit" style="width:100%;">Anmelden</button>
+            <p class="form-status" data-form-status style="margin:6px 0 0; font-size:12px;"></p>
+          </form>
+          <div class="social-icons">
+            <a href="https://instagram.com/" target="_blank" rel="noopener"><img src="Instagram.png" alt="Instagram" /></a>
+            <a href="https://linkedin.com/" target="_blank" rel="noopener"><img src="Linkedin.png" alt="LinkedIn" /></a>
+            <a href="https://wa.me/+49 152 92612795" target="_blank" rel="noopener"><img src="WhatsApp.png" alt="WhatsApp" /></a>
+            <a href="https://twitter.com/" target="_blank" rel="noopener"><img src="X.png" alt="X (Twitter)" /></a>
+            <a href="https://facebook.com/" target="_blank" rel="noopener"><img src="Facebook.png" alt="Facebook" /></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© <span data-year></span> NobleFrame. Alle Rechte vorbehalten.</span>
+        <span>Made with clean code + infinite passion</span>
+      </div>
+    </footer>
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top" aria-label="Nach oben">↑</button>
+
+    <!-- MODALS -->
+    <div class="modal" data-modal="impressum">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Impressum</h2>
+          <button class="modal-close" data-close-modal>×</button>
+        </div>
+        <div class="modal-body">
+          <h3>Anbieter</h3>
+          <p><strong>NobleFrame</strong><br>Nico Zimmermann &amp; Tobias Bunnefeld<br>Kroosgang 23<br>48565 Steinfurt</p>
+
+          <h3>Kontakt</h3>
+          <p>E-Mail: <a href="mailto:info@nobleframe.de" style="color: var(--cyan);">info@nobleframe.de</a><br>
+          Telefon: +49 152 92612795</p>
+
+          <h3>Umsatzsteuer-ID</h3>
+          <p>Umsatzsteuer-Identifikationsnummer nach §27a Umsatzsteuergesetz:<br>DE 135 445 988</p>
+
+          <h3>Verantwortlich für den Inhalt</h3>
+          <p>Nico Zimmermann & Tobias Bunnefeld</p>
+
+          <h3>Haftungsausschluss</h3>
+          <p>Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" data-modal="datenschutz">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Datenschutzerklärung</h2>
+          <button class="modal-close" data-close-modal>×</button>
+        </div>
+        <div class="modal-body">
+          <h3>1. Allgemeines</h3>
+          <p>Wir nehmen den Schutz deiner persönlichen Daten ernstlich. Diese Datenschutzerklärung erläutert, welche Informationen wir sammeln und wie wir sie nutzen.</p>
+
+          <h3>2. Erhebung von Daten</h3>
+          <p>Wir sammeln Daten nur wenn du:</p>
+          <ul>
+            <li>Kontaktformulare ausfüllst</li>
+            <li>Dich zu unserem Newsletter anmeldest</li>
+            <li>Mit uns kommunizierst</li>
+          </ul>
+
+          <h3>3. Verwendung der Daten</h3>
+          <p>Deine Daten werden verwendet um:</p>
+          <ul>
+            <li>Deine Anfrage zu bearbeiten</li>
+            <li>Dir relevante Informationen zuzusenden</li>
+            <li>Die Webseite zu verbessern</li>
+          </ul>
+
+          <h3>4. Google Analytics</h3>
+          <p>Wir nutzen Google Analytics zur Analyse deiner Nutzung. Google speichert deine IP-Adresse und Cookie-Informationen. Du kannst Google Analytics deaktivieren: <a href="https://tools.google.com/dlpage/gaoptout" style="color: var(--cyan);">Google Analytics Opt-Out</a></p>
+
+          <h3>5. Cookies</h3>
+          <p>Unsere Webseite nutzt Cookies zur Funktionalität und Analyse. Du kannst Cookies in deinen Browser-Einstellungen deaktivieren.</p>
+
+          <h3>6. Deine Rechte</h3>
+          <p>Du hast das Recht auf:</p>
+          <ul>
+            <li>Auskunft über deine Daten</li>
+            <li>Berichtigung falscher Daten</li>
+            <li>Löschung deiner Daten</li>
+            <li>Datenportabilität</li>
+          </ul>
+
+          <p>Kontaktiere uns bei Fragen: <a href="mailto:info@nobleframe.de" style="color: var(--cyan);">info@nobleframe.de</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" data-modal="agb">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Allgemeine Geschäftsbedingungen</h2>
+          <button class="modal-close" data-close-modal>×</button>
+        </div>
+        <div class="modal-body">
+          <h3>1. Leistungsumfang</h3>
+          <p>NobleFrame erbringt Dienstleistungen in den Bereichen Webentwicklung, E‑Commerce und Digital Marketing. Der genaue Umfang wird in individuellen Verträgen definiert.</p>
+
+          <h3>2. Zahlungsbedingungen</h3>
+          <p>Zahlungen erfolgen nach folgenden Bedingungen:</p>
+          <ul>
+            <li>30% Anzahlung nach Auftrag</li>
+            <li>40% nach Zwischenstand</li>
+            <li>30% nach Abnahme</li>
+          </ul>
+
+          <h3>3. Lieferzeiten</h3>
+          <p>Lieferzeiten werden individuell vereinbart. Sie sind nicht verbindlich, wenn unvorhergesehene Umstände oder höhere Gewalt eintritt.</p>
+
+          <h3>4. Gewährleistung</h3>
+          <p>Wir gewährleisten fehlerfreie Leistung nach dem Stand der Technik. Die Gewährleistungsfrist beträgt 12 Monate nach Abnahme.</p>
+
+          <h3>5. Haftung</h3>
+          <p>Unsere Haftung ist beschränkt auf direkten Schadensersatz bis zur Höhe der vereinbarten Vergütung.</p>
+
+          <h3>6. Geistiges Eigentum</h3>
+          <p>Alle erstellten Werke gehen mit vollständiger Zahlung in dein Eigentum über. Ausnahme: Standard-Komponenten und Open-Source-Code.</p>
+
+          <h3>7. Widerrufsrecht</h3>
+          <p>Wie ein Unternehmen hast du kein Widerrufsrecht nach deutschem Gesetz.</p>
+
+          <h3>8. Datenschutz</h3>
+          <p>Wir beachten alle geltenden Datenschutzgesetze. Siehe unsere Datenschutzerklärung.</p>
+
+          <h3>9. Schluss-bestimmungen</h3>
+          <p>Es gelten die Gesetze der Bundesrepublik Deutschland. Gerichtsstand ist Münster.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" data-modal="cookies">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Cookie-Richtlinie</h2>
+          <button class="modal-close" data-close-modal>×</button>
+        </div>
+        <div class="modal-body">
+          <h3>Was sind Cookies?</h3>
+          <p>Cookies sind kleine Textdateien, die auf deinem Gerät gespeichert werden. Sie helfen uns die Website zu verbessern.</p>
+
+          <h3>Notwendige Cookies</h3>
+          <p>Diese sind erforderlich für die Funktionalität:</p>
+          <ul>
+            <li>Session-Cookies für Sicherheit</li>
+            <li>Einstellungs-Cookies</li>
+          </ul>
+
+          <h3>Analytics Cookies</h3>
+          <p>Google Analytics nutzen wir zur Analyse deines Verhaltens. Du kannst dies ablehnen.</p>
+
+          <h3>Deine Kontrolle</h3>
+          <p>Du kannst Cookies in deinen Browser-Einstellungen verwalten.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tool: Website Audit -->
+    <div class="modal" data-modal="tool-audit">
+      <!-- Expand modal to occupy full width for better tool usability on mobile and desktop -->
+      <div class="modal-content" style="max-width: 100%; width: 100%;">
+        <div class="modal-header">
+          <h2>Website Audit & Analyse</h2>
+          <button class="modal-close" data-close-modal>×</button>
+        </div>
+        <div class="modal-body" style="padding:0;">
+          <!-- Pass tool parameter so only the Audit wizard is shown -->
+          <iframe src="labs.html?tool=audit" title="Audit Tool" style="width:100%; height:85vh; border:0; border-radius: 0 0 var(--radius-lg) var(--radius-lg);" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tool: ROI & Budget Kalkulator -->
+    <div class="modal" data-modal="tool-roi">
+      <div class="modal-content" style="max-width: 100%; width: 100%;">
+        <div class="modal-header">
+          <h2>ROI & Budget Kalkulator</h2>
+          <button class="modal-close" data-close-modal>×</button>
+        </div>
+        <div class="modal-body" style="padding:0;">
+          <!-- Pass tool parameter so only the ROI calculator is shown -->
+          <iframe src="labs.html?tool=roi" title="ROI Tool" style="width:100%; height:85vh; border:0; border-radius: 0 0 var(--radius-lg) var(--radius-lg);" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tool: Briefing Generator -->
+    <div class="modal" data-modal="tool-brief">
+      <div class="modal-content" style="max-width: 100%; width: 100%;">
+        <div class="modal-header">
+          <h2>Briefing‑Generator</h2>
+          <button class="modal-close" data-close-modal>×</button>
+        </div>
+        <div class="modal-body" style="padding:0;">
+          <!-- Pass tool parameter so only the Briefing generator is shown -->
+          <iframe src="labs.html?tool=brief" title="Briefing Generator" style="width:100%; height:85vh; border:0; border-radius: 0 0 var(--radius-lg) var(--radius-lg);" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- Coming Soon Modal -->
+    <div class="modal" data-modal="coming-soon">
+      <div class="modal-content" style="max-width: 600px;">
+        <div class="modal-header">
+          <h2>Coming Soon</h2>
+          <button class="modal-close" data-close-modal>×</button>
+        </div>
+        <div class="modal-body">
+          <p>Diese Funktion befindet sich in Entwicklung. Freu dich auf neue magische Tools – stay tuned! ✨</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Inspiration Modal -->
+    <div class="modal" data-modal="tool-inspire">
+      <div class="modal-content" style="max-width: 600px;">
+        <div class="modal-header">
+          <h2>Inspiration</h2>
+          <button class="modal-close" data-close-modal>×</button>
+        </div>
+        <div class="modal-body">
+          <p id="inspire-text">Bereit für eine Portion Inspiration?</p>
+          <div style="margin-top: 20px; display:flex; flex-wrap: wrap; gap: 10px;">
+            <button class="btn btn-primary" type="button" id="inspire-next">Nächstes Zitat</button>
+            <button class="btn btn-secondary" type="button" data-close-modal>Schließen</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Code Rain Settings Modal -->
+    <div class="modal" data-modal="tool-settings">
+      <div class="modal-content" style="max-width: 600px;">
+        <div class="modal-header">
+          <h2>Code&nbsp;Rain Settings</h2>
+          <button class="modal-close" data-close-modal>×</button>
+        </div>
+        <div class="modal-body">
+          <p style="margin-bottom: 12px;">Passe die Geschwindigkeit des Code‑Regens an. Ziehe den Regler, um die Animation zu beschleunigen oder zu verlangsamen.</p>
+          <label for="code-speed" style="display:block;margin-bottom:6px;font-size:14px;font-weight:600;">Speed</label>
+          <input id="code-speed" type="range" min="5" max="20" value="10" step="1" style="width:100%;">
+          <p style="font-size:12px; color: var(--text-muted); margin-top:8px;">Langsam (5) – Schnell (20)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cursor Glow Element -->
+  <div id="cursor-glow" class="cursor-glow"></div>
+
+  <!-- SCRIPT -->
+  <script>
+    "use strict";
+
+    const $ = (sel, root) => (root || document).querySelector(sel);
+    const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
+
+    // Formspree Integration
+    const FORMSPREE_ENDPOINT = "https://formspree.io/f/mnneelgy";
+
+    async function sendToFormspree(form, extra = {}) {
+      const fd = new FormData(form);
+      // Honeypot: skip if hidden field filled
+      if (fd.get("_gotcha")) return { skipped: true };
+      Object.entries(extra).forEach(([k, v]) => fd.append(k, v));
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        body: fd,
+        headers: { "Accept": "application/json" }
+      });
+      if (!res.ok) throw new Error("Formspree error: " + res.status);
+      return res.json().catch(() => ({}));
+    }
+
+    function setFormStatus(form, msg, ok = true) {
+      const el = form.querySelector("[data-form-status]");
+      if (!el) return;
+      // Append a random fun success message when status is OK to surprise the user.
+      let finalMsg = msg;
+      if (ok && successMessages && successMessages.length) {
+        // 50% chance to append an Easter egg message
+        if (Math.random() > 0.5) {
+          const idx = Math.floor(Math.random() * successMessages.length);
+          finalMsg += ' ' + successMessages[idx];
+        }
+      }
+      el.textContent = finalMsg;
+      el.style.color = ok ? "var(--cyan)" : "rgba(255,90,90,.95)";
+    }
+
+    // Navigation
+    const pages = $$("[data-page]");
+    const navLinks = $$("[data-nav]");
+    const links = $("[data-links]");
+    const navToggle = $("[data-toggle-nav]");
+
+    // Theme toggle: load saved theme and register click handler
+    const themeToggleBtn = document.querySelector('.theme-toggle');
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+      document.documentElement.dataset.theme = 'light';
+    }
+    if (themeToggleBtn) {
+      themeToggleBtn.addEventListener('click', () => {
+        const current = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
+        const next = current === 'light' ? 'dark' : 'light';
+        document.documentElement.dataset.theme = next;
+        localStorage.setItem('theme', next);
+      });
+    }
+
+    function setActivePage(pageId) {
+      pages.forEach(p => p.classList.toggle("active", p.id === pageId));
+      navLinks.forEach(a => a.setAttribute("aria-current", a.getAttribute("data-nav") === pageId ? "page" : "false"));
+      if (links) links.classList.remove("open");
+      if (navToggle) navToggle.setAttribute("aria-expanded", "false");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function routeFromHash() {
+      const hash = (location.hash || "#home").replace("#", "").trim();
+      const allowed = new Set(pages.map(p => p.id));
+      const pageId = allowed.has(hash) ? hash : "home";
+      setActivePage(pageId);
+    }
+
+    // Modal Handler
+    function openModal(name) {
+      // Only open the modal element, not the trigger (anchors/buttons share the same data-modal)
+      const modal = document.querySelector(`.modal[data-modal="${name}"]`);
+      if (modal) modal.classList.add("open");
+    }
+
+    function closeAllModals() {
+      $$(".modal.open").forEach(m => m.classList.remove("open"));
+    }
+
+    // Event Delegation
+    document.addEventListener("click", (e) => {
+      const t = e.target.closest("[data-nav], [data-toggle-nav], [data-modal], [data-close-modal]");
+      if (!t) return;
+
+      if (t.matches("[data-nav]")) {
+        e.preventDefault();
+        const page = t.getAttribute("data-nav");
+        if (page) {
+          closeAllModals();
+          history.pushState(null, "", `#${page}`);
+          routeFromHash();
+        }
+        return;
+      }
+
+      if (t.matches("[data-toggle-nav]")) {
+        if (links) links.classList.toggle("open");
+        t.setAttribute("aria-expanded", links?.classList.contains("open") ? "true" : "false");
+        return;
+      }
+
+      if (t.matches("[data-modal]")) {
+        e.preventDefault();
+        const modalName = t.getAttribute("data-modal");
+        openModal(modalName);
+        // If the inspiration modal is opened, pick a new random quote
+        if (modalName === "tool-inspire") {
+          updateInspiration();
+        }
+        return;
+      }
+
+      if (t.matches("[data-close-modal]")) {
+        closeAllModals();
+        return;
+      }
+    });
+
+    // Contact Form Submission
+    const contactForm = $("[data-contact-form]");
+    if (contactForm) {
+      contactForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Sende…"; }
+        setFormStatus(contactForm, "Sende…", true);
+        try {
+          await sendToFormspree(contactForm, { type: "Contact" });
+          setFormStatus(contactForm, "✅ Danke! Wir melden uns in Kürze.", true);
+          contactForm.reset();
+        } catch (err) {
+          setFormStatus(contactForm, "❌ Fehler beim Senden. Bitte später erneut.", false);
+          console.error(err);
+        } finally {
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = "Anfrage senden"; }
+        }
+      });
+    }
+
+    // Newsletter Form Submission
+    $$("[data-newsletter-form]").forEach(nlForm => {
+      nlForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const btn = nlForm.querySelector('button[type="submit"]');
+        if (btn) { btn.disabled = true; btn.textContent = "Sende…"; }
+        setFormStatus(nlForm, "Sende…", true);
+        try {
+          await sendToFormspree(nlForm, { type: "Newsletter" });
+          setFormStatus(nlForm, "✅ Willkommen im Inner Circle!", true);
+          nlForm.reset();
+        } catch (err) {
+          setFormStatus(nlForm, "❌ Fehler beim Senden. Bitte später erneut.", false);
+          console.error(err);
+        } finally {
+          if (btn) { btn.disabled = false; btn.textContent = "Anmelden"; }
+        }
+      });
+    });
+
+    // Modal Backdrop Close
+    $$(".modal").forEach(modal => {
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeAllModals();
+      });
+    });
+
+    // Competence Card Expansion
+    $$(".competence-card").forEach(card => {
+      card.addEventListener("click", (e) => {
+        if (e.target.closest(".competence-expanded")) return;
+        const wasExpanded = card.classList.contains("expanded");
+        $$(".competence-card.expanded").forEach(c => c.classList.remove("expanded"));
+        if (!wasExpanded) card.classList.add("expanded");
+      });
+    });
+
+    // Cookie Banner Logic
+    const cookieBanner = $("#cookie-banner");
+    const cookieAccept = $("#cookie-accept");
+    const cookieDecline = $("#cookie-decline");
+    const cookieInfo = $("#cookie-info");
+    function showCookieBanner() {
+      if (cookieBanner && !localStorage.getItem("cookieConsent")) {
+        cookieBanner.style.display = "block";
+        document.body.classList.add("cookie-visible");
+      }
+    }
+    function hideCookieBanner() {
+      if (cookieBanner) cookieBanner.style.display = "none";
+      document.body.classList.remove("cookie-visible");
+    }
+    cookieAccept?.addEventListener("click", () => {
+      localStorage.setItem("cookieConsent", "accepted");
+      hideCookieBanner();
+    });
+    cookieDecline?.addEventListener("click", () => {
+      localStorage.setItem("cookieConsent", "declined");
+      hideCookieBanner();
+    });
+    cookieInfo?.addEventListener("click", (e) => {
+      e.preventDefault();
+      openModal("cookies");
+    });
+    showCookieBanner();
+
+    // Scroll Progress & Back‑to‑Top
+    const progressBar = document.getElementById("scroll-progress");
+    const backToTop = document.getElementById("back-to-top");
+    window.addEventListener("scroll", () => {
+      const scrollY = window.scrollY;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      const percent = docHeight ? (scrollY / docHeight) * 100 : 0;
+      if (progressBar) progressBar.style.width = percent + "%";
+      if (backToTop) {
+        if (scrollY > 600) {
+          backToTop.classList.add("show");
+        } else {
+          backToTop.classList.remove("show");
+        }
+      }
+    });
+    backToTop?.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // ================================================
+    // Inspiration Generator & Cursor Glow
+    // An array of motivational and creative quotes for the Inspiration modal.
+    const inspirationQuotes = [
+      'Code ist wie Poesie – reduziere, bis nur Schönheit bleibt.',
+      'Die beste Idee entsteht zwischen zwei Zeilen Code.',
+      'Innovation beginnt dort, wo du deine Komfortzone verlässt.',
+      'Jeder Bug erzählt dir eine Geschichte – hör zu.',
+      'Kreativität ist Intelligenz, die Spaß hat.',
+      'Perfektion ist nicht, wenn nichts mehr hinzuzufügen ist, sondern wenn man nichts mehr weglassen kann.',
+      'Große Produkte entstehen aus kleinen täglichen Verbesserungen.',
+      'Prototypen sind schneller als Meetings.',
+      'Ein Tag ohne Lachen ist ein Tag ohne Code.',
+      'Better done than perfect – iteriere, iteriere, iteriere.'
+    ];
+
+    // Fun success messages appended after successful form submissions. These act as hidden Easter Eggs and change randomly on each success.
+    const successMessages = [
+      '🎉 Deine Nachricht ist bei uns gelandet. Wir schicken bald Überraschungen!',
+      '🚀 Danke – du bist jetzt Teil unserer Dev‑Welt!',
+      '🧙‍♂️ Magic incoming… Wir melden uns schnellstmöglich.',
+      '🌟 Du hast einen digitalen Glückskeks geöffnet!'
+    ];
+
+    /**
+     * Picks a random quote from the inspirationQuotes array and updates the
+     * content of the Inspiration modal. This function is called when the
+     * Inspiration modal opens and when the user clicks the "Nächstes Zitat" button.
+     */
+    function updateInspiration() {
+      const textEl = document.getElementById('inspire-text');
+      if (!textEl) return;
+      const idx = Math.floor(Math.random() * inspirationQuotes.length);
+      textEl.textContent = inspirationQuotes[idx];
+    }
+
+    // Event listener for the "Nächstes Zitat" button inside the Inspiration modal
+    document.getElementById('inspire-next')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      updateInspiration();
+    });
+
+    // Cursor glow effect: follows the pointer on devices with a fine pointer (e.g. mouse)
+    (function() {
+      const glowEl = document.getElementById('cursor-glow');
+      if (glowEl && window.matchMedia('(pointer: fine)').matches) {
+        document.addEventListener('mousemove', (ev) => {
+          glowEl.style.left = ev.clientX + 'px';
+          glowEl.style.top = ev.clientY + 'px';
+        });
+      }
+    })();
+
+    // Code Rain Settings: allow users to dynamically change the speed of the falling code lines.
+    const codeSpeedInput = document.getElementById('code-speed');
+    function updateCodeSpeed() {
+      if (!codeSpeedInput) return;
+      const val = parseInt(codeSpeedInput.value, 10) || 10;
+      // Adjust each code line's animation duration based on the slider and index for subtle variation
+      document.querySelectorAll('.code-line').forEach((line, idx) => {
+        const base = 5 + (idx % 6);
+        line.style.animationDuration = (val + base) + 's';
+      });
+    }
+    // Update speed whenever the user moves the slider
+    codeSpeedInput?.addEventListener('input', updateCodeSpeed);
+    // Reset to default speed when settings modal opens
+    document.addEventListener('click', (evt) => {
+      const tgt = evt.target.closest('[data-modal]');
+      if (tgt && tgt.getAttribute('data-modal') === 'tool-settings' && codeSpeedInput) {
+        codeSpeedInput.value = '10';
+        updateCodeSpeed();
+      }
+    });
+
+    // Attach click handlers on all elements with data-modal attribute
+    // This redundancy ensures nested buttons or icons correctly trigger their modals
+    $$('[data-modal]').forEach(el => {
+      el.addEventListener('click', (evt) => {
+        evt.preventDefault();
+        const name = el.getAttribute('data-modal');
+        if (name) openModal(name);
+      });
+    });
+
+    // Init
+    $("[data-year]") && ($("[data-year]").textContent = new Date().getFullYear());
+    window.addEventListener("hashchange", routeFromHash);
+    routeFromHash();
+  </script>
+</body>
+</html>
