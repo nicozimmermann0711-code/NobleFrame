@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | NobleFrame Client Portal</title>
+    <meta name="description" content="NobleFrame Client Dashboard - Verwalten Sie Ihre Projekte und Dokumente.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --gold: #C9A962;
+            --gold-light: #E8D5A3;
+            --gold-dark: #8B7355;
+            --black: #0A0A0A;
+            --black-light: #141414;
+            --black-lighter: #1E1E1E;
+            --white: #FAFAFA;
+            --gray: #888888;
+            --gray-dark: #444444;
+            --success: #4CAF50;
+            --error: #F44336;
+            --warning: #FF9800;
+            
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'Montserrat', sans-serif;
+            
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: var(--font-body);
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        
+        ::selection { background: var(--gold); color: var(--black); }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--black); }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 4px; }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: var(--font-display);
+            font-weight: 400;
+            letter-spacing: 0.02em;
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201, 169, 98, 0.1);
+        }
+        
+        .nav-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 400;
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+        }
+        
+        .logo span { color: var(--gold); }
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .nav-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .nav-user-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--black);
+            font-size: 14px;
+        }
+        
+        .nav-user-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .nav-user-name {
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .nav-user-role {
+            font-size: 11px;
+            color: var(--gray);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .btn-primary {
+            background: var(--gold);
+            color: var(--black);
+        }
+        
+        .btn-primary:hover {
+            background: var(--gold-light);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+        }
+        
+        .btn-outline:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+        
+        .btn-ghost {
+            background: transparent;
+            color: var(--gray);
+            padding: 8px 16px;
+        }
+        
+        .btn-ghost:hover {
+            color: var(--white);
+        }
+        
+        /* Main Layout */
+        .dashboard {
+            padding-top: 80px;
+            min-height: 100vh;
+            display: flex;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background: var(--black-light);
+            border-right: 1px solid rgba(201, 169, 98, 0.1);
+            padding: 30px 0;
+            position: fixed;
+            top: 80px;
+            left: 0;
+            bottom: 0;
+            overflow-y: auto;
+        }
+        
+        .sidebar-nav {
+            list-style: none;
+        }
+        
+        .sidebar-nav-item {
+            margin-bottom: 5px;
+        }
+        
+        .sidebar-nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 25px;
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 14px;
+            transition: var(--transition);
+            border-left: 3px solid transparent;
+        }
+        
+        .sidebar-nav-link:hover {
+            color: var(--white);
+            background: rgba(201, 169, 98, 0.05);
+        }
+        
+        .sidebar-nav-link.active {
+            color: var(--gold);
+            background: rgba(201, 169, 98, 0.1);
+            border-left-color: var(--gold);
+        }
+        
+        .sidebar-nav-link svg {
+            flex-shrink: 0;
+        }
+        
+        .sidebar-section {
+            padding: 20px 25px 10px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gray-dark);
+        }
+        
+        /* Main Content */
+        .main {
+            flex: 1;
+            margin-left: 260px;
+            padding: 40px;
+        }
+        
+        .page-header {
+            margin-bottom: 40px;
+        }
+        
+        .page-header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        
+        .page-header p {
+            color: var(--gray);
+            font-size: 15px;
+        }
+        
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-card {
+            background: var(--black-light);
+            border: 1px solid rgba(201, 169, 98, 0.1);
+            padding: 25px;
+            transition: var(--transition);
+        }
+        
+        .stat-card:hover {
+            border-color: rgba(201, 169, 98, 0.3);
+        }
+        
+        .stat-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .stat-card-icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(201, 169, 98, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+        }
+        
+        .stat-card-value {
+            font-family: var(--font-display);
+            font-size: 36px;
+            color: var(--gold);
+            margin-bottom: 5px;
+        }
+        
+        .stat-card-label {
+            font-size: 13px;
+            color: var(--gray);
+        }
+        
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+        
+        /* Cards */
+        .card {
+            background: var(--black-light);
+            border: 1px solid rgba(201, 169, 98, 0.1);
+        }
+        
+        .card-header {
+            padding: 20px 25px;
+            border-bottom: 1px solid rgba(201, 169, 98, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .card-title {
+            font-size: 18px;
+        }
+        
+        .card-body {
+            padding: 25px;
+        }
+        
+        /* Projects List */
+        .project-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(201, 169, 98, 0.1);
+        }
+        
+        .project-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        
+        .project-item:first-child {
+            padding-top: 0;
+        }
+        
+        .project-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(201, 169, 98, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            flex-shrink: 0;
+        }
+        
+        .project-info {
+            flex: 1;
+        }
+        
+        .project-name {
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .project-meta {
+            font-size: 12px;
+            color: var(--gray);
+        }
+        
+        .project-status {
+            padding: 6px 12px;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        
+        .project-status.active {
+            background: rgba(76, 175, 80, 0.1);
+            color: var(--success);
+        }
+        
+        .project-status.review {
+            background: rgba(255, 152, 0, 0.1);
+            color: var(--warning);
+        }
+        
+        .project-status.completed {
+            background: rgba(201, 169, 98, 0.1);
+            color: var(--gold);
+        }
+        
+        /* Activity List */
+        .activity-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(201, 169, 98, 0.05);
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        
+        .activity-item:first-child {
+            padding-top: 0;
+        }
+        
+        .activity-icon {
+            width: 36px;
+            height: 36px;
+            background: rgba(201, 169, 98, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            flex-shrink: 0;
+        }
+        
+        .activity-content {
+            flex: 1;
+        }
+        
+        .activity-text {
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+        
+        .activity-time {
+            font-size: 11px;
+            color: var(--gray);
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        
+        .empty-state-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(201, 169, 98, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: var(--gold);
+        }
+        
+        .empty-state h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+        
+        .empty-state p {
+            color: var(--gray);
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+        
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .quick-action {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            padding: 25px 15px;
+            background: var(--black);
+            border: 1px solid rgba(201, 169, 98, 0.1);
+            text-decoration: none;
+            color: var(--white);
+            transition: var(--transition);
+        }
+        
+        .quick-action:hover {
+            border-color: var(--gold);
+            background: rgba(201, 169, 98, 0.05);
+        }
+        
+        .quick-action-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(201, 169, 98, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+        }
+        
+        .quick-action-text {
+            font-size: 13px;
+            text-align: center;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--black);
+            padding: 40px;
+            margin-left: 260px;
+            border-top: 1px solid rgba(201, 169, 98, 0.1);
+        }
+        
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .footer p {
+            color: var(--gray);
+            font-size: 12px;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 12px;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+        
+        /* Mobile Sidebar Toggle */
+        .sidebar-toggle {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            background: var(--gold);
+            border: none;
+            border-radius: 50%;
+            color: var(--black);
+            cursor: pointer;
+            z-index: 1001;
+            box-shadow: 0 4px 20px rgba(201, 169, 98, 0.4);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+                z-index: 1000;
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .main {
+                margin-left: 0;
+            }
+            
+            .footer {
+                margin-left: 0;
+            }
+            
+            .sidebar-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .nav-user-info {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .main {
+                padding: 25px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer {
+                padding: 25px;
+            }
+            
+            .footer-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="../index.html" class="logo">Noble<span>Frame</span></a>
+            
+            <div class="nav-right">
+                <a href="../index.html" class="btn btn-ghost">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    Zur Website
+                </a>
+                
+                <div class="nav-user">
+                    <div class="nav-user-avatar" id="userAvatar">NF</div>
+                    <div class="nav-user-info">
+                        <span class="nav-user-name" id="userName">Laden...</span>
+                        <span class="nav-user-role">Client</span>
+                    </div>
+                </div>
+                
+                <button class="btn btn-outline" onclick="logout()" style="padding: 10px 20px;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                    Logout
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Dashboard Layout -->
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <ul class="sidebar-nav">
+                <li class="sidebar-nav-item">
+                    <a href="dashboard.html" class="sidebar-nav-link active">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="#" class="sidebar-nav-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                        Projekte
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="#" class="sidebar-nav-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        Dokumente
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="#" class="sidebar-nav-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                        Nachrichten
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="sidebar-section">Finanzen</div>
+            <ul class="sidebar-nav">
+                <li class="sidebar-nav-item">
+                    <a href="#" class="sidebar-nav-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                        Rechnungen
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="#" class="sidebar-nav-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        Angebote
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="sidebar-section">Account</div>
+            <ul class="sidebar-nav">
+                <li class="sidebar-nav-item">
+                    <a href="#" class="sidebar-nav-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        Profil
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="#" class="sidebar-nav-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                        Einstellungen
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="../kontakt.html" class="sidebar-nav-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                        Hilfe & Support
+                    </a>
+                </li>
+            </ul>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main">
+            <div class="page-header">
+                <h1>Willkommen zurück, <span id="welcomeName">Client</span>!</h1>
+                <p>Hier ist eine Übersicht Ihrer Projekte und Aktivitäten.</p>
+            </div>
+            
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <div class="stat-card-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                        </div>
+                    </div>
+                    <div class="stat-card-value">0</div>
+                    <div class="stat-card-label">Aktive Projekte</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <div class="stat-card-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        </div>
+                    </div>
+                    <div class="stat-card-value">0</div>
+                    <div class="stat-card-label">Dokumente</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <div class="stat-card-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                        </div>
+                    </div>
+                    <div class="stat-card-value">0</div>
+                    <div class="stat-card-label">Nachrichten</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <div class="stat-card-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                        </div>
+                    </div>
+                    <div class="stat-card-value">0</div>
+                    <div class="stat-card-label">Offene Rechnungen</div>
+                </div>
+            </div>
+            
+            <!-- Content Grid -->
+            <div class="content-grid">
+                <!-- Projects -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Ihre Projekte</h3>
+                        <a href="../kontakt.html" class="btn btn-primary" style="padding: 10px 20px;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                            Neues Projekt
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <div class="empty-state">
+                            <div class="empty-state-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                            </div>
+                            <h3>Noch keine Projekte</h3>
+                            <p>Starten Sie Ihr erstes Projekt mit NobleFrame und erleben Sie digitale Exzellenz.</p>
+                            <a href="../kontakt.html" class="btn btn-primary">Projekt anfragen</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sidebar Column -->
+                <div>
+                    <!-- Quick Actions -->
+                    <div class="card" style="margin-bottom: 30px;">
+                        <div class="card-header">
+                            <h3 class="card-title">Schnellzugriff</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="quick-actions">
+                                <a href="../kontakt.html" class="quick-action">
+                                    <div class="quick-action-icon">
+                                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                                    </div>
+                                    <span class="quick-action-text">Support kontaktieren</span>
+                                </a>
+                                <a href="#" class="quick-action">
+                                    <div class="quick-action-icon">
+                                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                                    </div>
+                                    <span class="quick-action-text">Dokumente hochladen</span>
+                                </a>
+                                <a href="../faq.html" class="quick-action">
+                                    <div class="quick-action-icon">
+                                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                                    </div>
+                                    <span class="quick-action-text">FAQ & Hilfe</span>
+                                </a>
+                                <a href="#" class="quick-action">
+                                    <div class="quick-action-icon">
+                                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                    </div>
+                                    <span class="quick-action-text">Profil bearbeiten</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recent Activity -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Aktivitäten</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                </div>
+                                <div class="activity-content">
+                                    <div class="activity-text">Account erstellt</div>
+                                    <div class="activity-time" id="accountCreated">Gerade eben</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <p>&copy; 2026 NobleFrame. Alle Rechte vorbehalten.</p>
+            <div class="footer-links">
+                <a href="../index.html">Home</a>
+                <a href="../impressum.html">Impressum</a>
+                <a href="../datenschutz.html">Datenschutz</a>
+                <a href="../kontakt.html">Kontakt</a>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Mobile Sidebar Toggle -->
+    <button class="sidebar-toggle" id="sidebarToggle">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    
+    <script>
+        // ============================================
+        // AUTH CHECK & USER DATA
+        // ============================================
+        
+        const STORAGE_KEYS = {
+            USERS: 'nobleframe_users',
+            CURRENT_USER: 'nobleframe_current_user',
+            SESSION: 'nobleframe_session'
+        };
+        
+        function checkAuth() {
+            const session = localStorage.getItem(STORAGE_KEYS.SESSION);
+            
+            if (!session) {
+                window.location.href = 'index.html';
+                return null;
+            }
+            
+            const parsed = JSON.parse(session);
+            
+            // Check if expired
+            if (new Date(parsed.expiresAt) < new Date()) {
+                localStorage.removeItem(STORAGE_KEYS.SESSION);
+                localStorage.removeItem(STORAGE_KEYS.CURRENT_USER);
+                window.location.href = 'index.html';
+                return null;
+            }
+            
+            return parsed;
+        }
+        
+        function getCurrentUser() {
+            const user = localStorage.getItem(STORAGE_KEYS.CURRENT_USER);
+            return user ? JSON.parse(user) : null;
+        }
+        
+        function logout() {
+            localStorage.removeItem(STORAGE_KEYS.SESSION);
+            localStorage.removeItem(STORAGE_KEYS.CURRENT_USER);
+            window.location.href = 'index.html';
+        }
+        
+        function getInitials(name) {
+            return name
+                .split(' ')
+                .map(n => n[0])
+                .join('')
+                .toUpperCase()
+                .slice(0, 2);
+        }
+        
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diff = now - date;
+            
+            if (diff < 60000) return 'Gerade eben';
+            if (diff < 3600000) return `Vor ${Math.floor(diff / 60000)} Minuten`;
+            if (diff < 86400000) return `Vor ${Math.floor(diff / 3600000)} Stunden`;
+            
+            return date.toLocaleDateString('de-DE', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            });
+        }
+        
+        // ============================================
+        // INITIALIZE
+        // ============================================
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const session = checkAuth();
+            if (!session) return;
+            
+            const user = getCurrentUser();
+            if (!user) {
+                logout();
+                return;
+            }
+            
+            // Update UI with user data
+            document.getElementById('userName').textContent = user.name;
+            document.getElementById('welcomeName').textContent = user.name.split(' ')[0];
+            document.getElementById('userAvatar').textContent = getInitials(user.name);
+            
+            // Get full user data for created date
+            const users = JSON.parse(localStorage.getItem(STORAGE_KEYS.USERS) || '[]');
+            const fullUser = users.find(u => u.id === user.id);
+            
+            if (fullUser && fullUser.createdAt) {
+                document.getElementById('accountCreated').textContent = formatDate(fullUser.createdAt);
+            }
+        });
+        
+        // ============================================
+        // SIDEBAR TOGGLE (Mobile)
+        // ============================================
+        
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const sidebar = document.getElementById('sidebar');
+        
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+        });
+        
+        // Close sidebar when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
+                sidebar.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

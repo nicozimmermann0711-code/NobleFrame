@@ -3,199 +3,221 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Datenschutzerklärung – NobleFrame</title>
-    <meta name="robots" content="noindex">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23000' width='32' height='32'/%3E%3Crect x='2' y='2' width='28' height='28' fill='none' stroke='%23C9A962' stroke-width='2'/%3E%3C/svg%3E">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Datenschutzerklärung | NobleFrame</title>
+    <meta name="description" content="Datenschutzerklärung von NobleFrame - Informationen zum Schutz Ihrer Daten.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        *{margin:0;padding:0;box-sizing:border-box}
-        :root{--gold:#C9A962;--gold-light:#E8D5A3;--black:#000;--white:#FAFAFA;--white-muted:rgba(250,250,250,.75);--white-subtle:rgba(250,250,250,.45);--gradient:linear-gradient(135deg,#C9A962 0%,#E8D5A3 50%,#C9A962 100%)}
-        html{scroll-behavior:smooth}
-        body{font-family:'Outfit',sans-serif;background:var(--black);color:var(--white);line-height:1.8}
+        :root { --gold: #C9A962; --gold-light: #E8D5A3; --black: #0A0A0A; --black-light: #141414; --white: #FAFAFA; --gray: #888888; --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); --font-display: 'Cormorant Garamond', serif; --font-body: 'Montserrat', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-body); background: var(--black); color: var(--white); line-height: 1.7; }
+        ::selection { background: var(--gold); color: var(--black); }
+        h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 400; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 5%; }
         
-        .nav-wrapper{position:fixed;top:0;left:0;width:100%;z-index:1000;background:rgba(0,0,0,.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(201,169,98,.1)}
-        .nav-main{display:flex;justify-content:space-between;align-items:center;padding:20px 60px}
-        .logo{display:flex;align-items:center;gap:15px;text-decoration:none}
-        .logo-icon{width:45px;height:45px}
-        .logo-text{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;letter-spacing:8px;color:var(--white);text-transform:uppercase}
-        .nav-back{padding:12px 25px;color:var(--white-muted);text-decoration:none;font-size:.85rem;letter-spacing:1px;border:1px solid rgba(201,169,98,.2);transition:all .3s}
-        .nav-back:hover{border-color:var(--gold);color:var(--gold)}
-
-        .legal-container{max-width:800px;margin:0 auto;padding:160px 40px 80px}
-        .legal-header{margin-bottom:50px}
-        .legal-header h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:300;margin-bottom:15px}
-        .legal-header h1 span{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-        .legal-header p{color:var(--white-subtle);font-size:.9rem}
+        .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 25px 0; background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(201, 169, 98, 0.1); }
+        .nav-inner { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--font-display); font-size: 28px; color: var(--white); text-decoration: none; }
+        .logo span { color: var(--gold); }
+        .nav-links { display: flex; align-items: center; gap: 40px; list-style: none; }
+        .nav-links a { font-size: 13px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white); text-decoration: none; transition: var(--transition); }
+        .nav-links a:hover { color: var(--gold); }
+        .btn-outline { display: inline-flex; align-items: center; padding: 12px 28px; font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; background: transparent; color: var(--gold); border: 1px solid var(--gold); transition: var(--transition); }
+        .btn-outline:hover { background: var(--gold); color: var(--black); }
+        .menu-toggle { display: none; flex-direction: column; gap: 6px; cursor: pointer; padding: 10px; }
+        .menu-toggle span { width: 28px; height: 2px; background: var(--gold); }
         
-        .legal-section{margin-bottom:40px}
-        .legal-section h2{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;color:var(--gold);margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid rgba(201,169,98,.15)}
-        .legal-section h3{font-size:1rem;font-weight:500;color:var(--white);margin:25px 0 12px}
-        .legal-section p,.legal-section li{color:var(--white-muted);font-size:.95rem;margin-bottom:12px}
-        .legal-section ul{list-style:none;padding-left:0;margin:15px 0}
-        .legal-section li{padding-left:20px;position:relative;margin-bottom:8px}
-        .legal-section li::before{content:'';position:absolute;left:0;top:10px;width:6px;height:6px;background:var(--gold);opacity:.5}
-        .legal-section a{color:var(--gold);text-decoration:none}
-        .legal-section a:hover{text-decoration:underline}
+        .page-header { padding: 180px 0 60px; text-align: center; position: relative; }
+        .page-header::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(201, 169, 98, 0.08) 0%, transparent 50%); pointer-events: none; }
+        .page-header h1 { font-size: clamp(36px, 5vw, 56px); margin-bottom: 20px; }
+        .page-header p { color: var(--gray); font-size: 14px; }
         
-        .contact-box{background:rgba(201,169,98,.03);border:1px solid rgba(201,169,98,.15);padding:25px;margin:20px 0}
-        .contact-box p{margin-bottom:8px}
-        .contact-box strong{color:var(--white)}
+        .legal-content { padding: 60px 0 120px; }
+        .legal-container { max-width: 800px; margin: 0 auto; }
+        .legal-section { margin-bottom: 50px; }
+        .legal-section h2 { font-size: 26px; color: var(--gold); margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(201, 169, 98, 0.2); }
+        .legal-section h3 { font-size: 18px; margin: 25px 0 15px; color: var(--white); }
+        .legal-section p { color: var(--gray); margin-bottom: 15px; font-size: 14px; line-height: 1.8; }
+        .legal-section ul { color: var(--gray); margin: 15px 0 15px 25px; font-size: 14px; }
+        .legal-section li { margin-bottom: 8px; }
+        .legal-section a { color: var(--gold); text-decoration: none; }
+        .legal-section a:hover { text-decoration: underline; }
         
-        .info-box{background:rgba(201,169,98,.05);border-left:3px solid var(--gold);padding:20px;margin:20px 0}
-        .info-box p{margin-bottom:0}
+        .footer { background: var(--black); padding: 80px 0 40px; border-top: 1px solid rgba(201, 169, 98, 0.1); }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+        .footer-brand .logo { margin-bottom: 20px; display: inline-block; }
+        .footer-brand p { color: var(--gray); font-size: 14px; margin-bottom: 25px; max-width: 300px; }
+        .footer-social { display: flex; gap: 15px; }
+        .footer-social a { width: 44px; height: 44px; border: 1px solid rgba(201, 169, 98, 0.3); display: flex; align-items: center; justify-content: center; color: var(--gold); text-decoration: none; transition: var(--transition); }
+        .footer-social a:hover { background: var(--gold); color: var(--black); }
+        .footer-col h4 { font-family: var(--font-body); font-size: 14px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 25px; color: var(--gold); }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul a { color: var(--gray); text-decoration: none; font-size: 14px; transition: var(--transition); }
+        .footer-col ul a:hover { color: var(--gold); }
+        .footer-contact-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 15px; color: var(--gray); font-size: 14px; }
+        .footer-contact-item svg { color: var(--gold); flex-shrink: 0; margin-top: 2px; }
+        .footer-contact-item a { color: var(--gray); text-decoration: none; transition: var(--transition); }
+        .footer-contact-item a:hover { color: var(--gold); }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 40px; border-top: 1px solid rgba(201, 169, 98, 0.1); flex-wrap: wrap; gap: 20px; }
+        .footer-bottom p { color: var(--gray); font-size: 13px; }
+        .footer-legal { display: flex; gap: 30px; }
+        .footer-legal a { color: var(--gray); text-decoration: none; font-size: 13px; transition: var(--transition); }
+        .footer-legal a:hover { color: var(--gold); }
         
-        .footer-mini{padding:40px;border-top:1px solid rgba(201,169,98,.1);text-align:center;margin-top:60px}
-        .footer-mini p{color:var(--white-subtle);font-size:.85rem}
-        .footer-mini a{color:var(--gold);text-decoration:none;margin:0 15px}
-
-        @media(max-width:768px){.nav-main{padding:15px 25px}.legal-container{padding:140px 25px 60px}}
+        @media (max-width: 1024px) { .nav-links { position: fixed; inset: 0; background: rgba(10, 10, 10, 0.98); flex-direction: column; justify-content: center; gap: 30px; transform: translateX(100%); transition: var(--transition); } .nav-links.active { transform: translateX(0); } .menu-toggle { display: flex; } .footer-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr; gap: 40px; } .footer-bottom { flex-direction: column; text-align: center; } }
     </style>
 </head>
 <body>
-
-<div class="nav-wrapper">
-    <nav class="nav-main">
-        <a href="index.html" class="logo">
-            <div class="logo-icon"><svg viewBox="0 0 100 100"><rect x="5" y="5" width="90" height="90" fill="none" stroke="#C9A962" stroke-width="2"/><rect x="25" y="25" width="50" height="50" fill="none" stroke="#C9A962" stroke-width="1.5" opacity=".6"/></svg></div>
-            <span class="logo-text">NobleFrame</span>
-        </a>
-        <a href="index.html" class="nav-back">← Zurück zur Website</a>
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-inner">
+                <a href="index.html" class="logo">Noble<span>Frame</span></a>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="referenzen.html">Referenzen</a></li>
+                    <li><a href="tools.html">Tools</a></li>
+                    <li><a href="labs.html">Labs</a></li>
+                    <li><a href="karriere.html">Karriere</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="kontakt.html">Kontakt</a></li>
+                    <li><a href="client/index.html" class="btn-outline">Client Login</a></li>
+                </ul>
+                <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+            </div>
+        </div>
     </nav>
-</div>
-
-<div class="legal-container">
-    <header class="legal-header">
-        <h1><span>Datenschutzerklärung</span></h1>
-        <p>Stand: Januar 2026 | Letzte Aktualisierung: 06.01.2026</p>
+    
+    <header class="page-header">
+        <div class="container">
+            <h1>Datenschutzerklärung</h1>
+            <p>Stand: Januar 2026</p>
+        </div>
     </header>
-
-    <section class="legal-section">
-        <h2>1. Verantwortlicher</h2>
-        <div class="contact-box">
-            <p><strong>NobleFrame</strong></p>
-            <p>Nico Zimmermann & Tim Schülke</p>
-            <p>48565 Steinfurt</p>
-            <p>E-Mail: <a href="/cdn-cgi/l/email-protection#f891969e97b896979a949d9e8a99959dd69c9d"><span class="__cf_email__" data-cfemail="c3aaada5ac83adaca1afa6a5b1a2aea6eda7a6">[email&#160;protected]</span></a></p>
-            <p>Telefon: +49 152 92612795</p>
+    
+    <section class="legal-content">
+        <div class="container">
+            <div class="legal-container">
+                <div class="legal-section">
+                    <h2>1. Datenschutz auf einen Blick</h2>
+                    
+                    <h3>Allgemeine Hinweise</h3>
+                    <p>Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können.</p>
+                    
+                    <h3>Datenerfassung auf dieser Website</h3>
+                    <p><strong>Wer ist verantwortlich für die Datenerfassung auf dieser Website?</strong></p>
+                    <p>Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem Impressum dieser Website entnehmen.</p>
+                    
+                    <p><strong>Wie erfassen wir Ihre Daten?</strong></p>
+                    <p>Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen. Hierbei kann es sich z.B. um Daten handeln, die Sie in ein Kontaktformular eingeben. Andere Daten werden automatisch oder nach Ihrer Einwilligung beim Besuch der Website durch unsere IT-Systeme erfasst. Das sind vor allem technische Daten (z.B. Internetbrowser, Betriebssystem oder Uhrzeit des Seitenaufrufs).</p>
+                    
+                    <p><strong>Wofür nutzen wir Ihre Daten?</strong></p>
+                    <p>Ein Teil der Daten wird erhoben, um eine fehlerfreie Bereitstellung der Website zu gewährleisten. Andere Daten können zur Analyse Ihres Nutzerverhaltens verwendet werden.</p>
+                    
+                    <p><strong>Welche Rechte haben Sie bezüglich Ihrer Daten?</strong></p>
+                    <p>Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht, die Berichtigung oder Löschung dieser Daten zu verlangen. Wenn Sie eine Einwilligung zur Datenverarbeitung erteilt haben, können Sie diese Einwilligung jederzeit für die Zukunft widerrufen. Außerdem haben Sie das Recht, unter bestimmten Umständen die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen.</p>
+                </div>
+                
+                <div class="legal-section">
+                    <h2>2. Verantwortliche Stelle</h2>
+                    <p>Verantwortlich für die Datenverarbeitung auf dieser Website ist:</p>
+                    <p>NobleFrame<br>
+                    Nico [Nachname] & Tobias Bunnefeld<br>
+                    Steinfurt, Deutschland<br>
+                    E-Mail: <a href="mailto:hello@nobleframe.de">hello@nobleframe.de</a></p>
+                </div>
+                
+                <div class="legal-section">
+                    <h2>3. Datenerfassung auf dieser Website</h2>
+                    
+                    <h3>Cookies</h3>
+                    <p>Unsere Internetseiten verwenden so genannte „Cookies". Cookies sind kleine Datenpakete und richten auf Ihrem Endgerät keinen Schaden an. Sie werden entweder vorübergehend für die Dauer einer Sitzung (Session-Cookies) oder dauerhaft (permanente Cookies) auf Ihrem Endgerät gespeichert.</p>
+                    <p>Sie können Ihren Browser so einstellen, dass Sie über das Setzen von Cookies informiert werden und Cookies nur im Einzelfall erlauben, die Annahme von Cookies für bestimmte Fälle oder generell ausschließen sowie das automatische Löschen der Cookies beim Schließen des Browsers aktivieren.</p>
+                    
+                    <h3>Kontaktformular</h3>
+                    <p>Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.</p>
+                    <p>Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher Maßnahmen erforderlich ist. In allen übrigen Fällen beruht die Verarbeitung auf unserem berechtigten Interesse an der effektiven Bearbeitung der an uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO) oder auf Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO).</p>
+                    
+                    <h3>Newsletter</h3>
+                    <p>Wenn Sie den auf der Website angebotenen Newsletter beziehen möchten, benötigen wir von Ihnen eine E-Mail-Adresse sowie Informationen, welche uns die Überprüfung gestatten, dass Sie der Inhaber der angegebenen E-Mail-Adresse sind und mit dem Empfang des Newsletters einverstanden sind.</p>
+                    <p>Die von Ihnen zum Zwecke des Newsletter-Bezugs eingegebenen Daten werden ausschließlich für den Versand des Newsletters verwendet. Sie können den Newsletter jederzeit über den dafür vorgesehenen Link im Newsletter abbestellen.</p>
+                    
+                    <h3>Bewerbungen</h3>
+                    <p>Wir bieten Ihnen die Möglichkeit, sich bei uns zu bewerben. Im Folgenden informieren wir Sie über Umfang, Zweck und Verwendung Ihrer im Rahmen des Bewerbungsprozesses erhobenen personenbezogenen Daten.</p>
+                    <p>Ihre Bewerbungsdaten werden ausschließlich zum Zweck der Bearbeitung Ihrer Bewerbung verarbeitet. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (Durchführung vorvertraglicher Maßnahmen) sowie Art. 88 DSGVO i.V.m. § 26 BDSG.</p>
+                </div>
+                
+                <div class="legal-section">
+                    <h2>4. Analyse-Tools und Werbung</h2>
+                    <p>Diese Website nutzt derzeit keine Analyse-Tools oder Werbedienste von Drittanbietern. Sollte dies in Zukunft erfolgen, werden wir diese Datenschutzerklärung entsprechend aktualisieren und Sie ggf. um Ihre Einwilligung bitten.</p>
+                </div>
+                
+                <div class="legal-section">
+                    <h2>5. Plugins und Tools</h2>
+                    
+                    <h3>Google Fonts (lokales Hosting)</h3>
+                    <p>Diese Seite nutzt zur einheitlichen Darstellung von Schriftarten so genannte Google Fonts, die von Google bereitgestellt werden. Die Google Fonts sind lokal installiert. Eine Verbindung zu Servern von Google findet dabei nicht statt.</p>
+                    
+                    <h3>Formspree</h3>
+                    <p>Für unsere Kontakt- und Bewerbungsformulare nutzen wir den Dienst Formspree (Formspree Inc., 1 E Greenway Plaza, Suite 1008, Houston, TX 77046, USA). Wenn Sie ein Formular absenden, werden die eingegebenen Daten an Formspree übermittelt und von dort an uns weitergeleitet. Weitere Informationen: <a href="https://formspree.io/legal/privacy-policy" target="_blank" rel="noopener">https://formspree.io/legal/privacy-policy</a></p>
+                </div>
+                
+                <div class="legal-section">
+                    <h2>6. Ihre Rechte</h2>
+                    <p>Sie haben gegenüber uns folgende Rechte hinsichtlich der Sie betreffenden personenbezogenen Daten:</p>
+                    <ul>
+                        <li>Recht auf Auskunft (Art. 15 DSGVO)</li>
+                        <li>Recht auf Berichtigung (Art. 16 DSGVO)</li>
+                        <li>Recht auf Löschung (Art. 17 DSGVO)</li>
+                        <li>Recht auf Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
+                        <li>Recht auf Datenübertragbarkeit (Art. 20 DSGVO)</li>
+                        <li>Widerspruchsrecht (Art. 21 DSGVO)</li>
+                    </ul>
+                    <p>Sie haben zudem das Recht, sich bei einer Datenschutz-Aufsichtsbehörde über die Verarbeitung Ihrer personenbezogenen Daten durch uns zu beschweren.</p>
+                </div>
+                
+                <div class="legal-section">
+                    <h2>7. Speicherdauer</h2>
+                    <p>Soweit innerhalb dieser Datenschutzerklärung keine speziellere Speicherdauer genannt wurde, verbleiben Ihre personenbezogenen Daten bei uns, bis der Zweck für die Datenverarbeitung entfällt. Wenn Sie ein berechtigtes Löschersuchen geltend machen oder eine Einwilligung zur Datenverarbeitung widerrufen, werden Ihre Daten gelöscht, sofern wir keine anderen rechtlich zulässigen Gründe für die Speicherung Ihrer personenbezogenen Daten haben.</p>
+                </div>
+                
+                <div class="legal-section">
+                    <h2>8. SSL-/TLS-Verschlüsselung</h2>
+                    <p>Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte, wie zum Beispiel Bestellungen oder Anfragen, die Sie an uns als Seitenbetreiber senden, eine SSL- bzw. TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von „http://" auf „https://" wechselt und an dem Schloss-Symbol in Ihrer Browserzeile.</p>
+                </div>
+            </div>
         </div>
     </section>
-
-    <section class="legal-section">
-        <h2>2. Übersicht der Verarbeitungen</h2>
-        <p>Wir verarbeiten personenbezogene Daten nur, wenn dies für die Bereitstellung unserer Dienstleistungen erforderlich ist. Die nachfolgende Übersicht fasst die Arten der verarbeiteten Daten und die Zwecke ihrer Verarbeitung zusammen:</p>
-        
-        <h3>Arten der verarbeiteten Daten</h3>
-        <ul>
-            <li>Bestandsdaten (Name, Adresse)</li>
-            <li>Kontaktdaten (E-Mail, Telefonnummer)</li>
-            <li>Inhaltsdaten (Texteingaben, Projektbeschreibungen)</li>
-            <li>Nutzungsdaten (besuchte Seiten, Zugriffszeit)</li>
-            <li>Meta-/Kommunikationsdaten (IP-Adressen, Geräteinformationen)</li>
-        </ul>
-
-        <h3>Kategorien betroffener Personen</h3>
-        <ul>
-            <li>Interessenten und Geschäftskunden</li>
-            <li>Besucher der Website</li>
-            <li>Bewerber (separate Hinweise unter Abschnitt 8)</li>
-        </ul>
-    </section>
-
-    <section class="legal-section">
-        <h2>3. Rechtsgrundlagen</h2>
-        <p>Wir verarbeiten Ihre Daten auf Grundlage folgender Rechtsgrundlagen:</p>
-        <ul>
-            <li><strong>Einwilligung (Art. 6 Abs. 1 lit. a DSGVO)</strong> – Sie haben Ihre Einwilligung für bestimmte Verarbeitungszwecke erteilt.</li>
-            <li><strong>Vertragserfüllung (Art. 6 Abs. 1 lit. b DSGVO)</strong> – Die Verarbeitung ist zur Erfüllung eines Vertrags erforderlich.</li>
-            <li><strong>Rechtliche Verpflichtung (Art. 6 Abs. 1 lit. c DSGVO)</strong> – Die Verarbeitung ist zur Erfüllung einer rechtlichen Verpflichtung erforderlich.</li>
-            <li><strong>Berechtigte Interessen (Art. 6 Abs. 1 lit. f DSGVO)</strong> – Die Verarbeitung ist zur Wahrung unserer berechtigten Interessen erforderlich.</li>
-        </ul>
-    </section>
-
-    <section class="legal-section">
-        <h2>4. Kontaktaufnahme & Kontaktformular</h2>
-        <p>Bei der Kontaktaufnahme mit uns (z.B. per Kontaktformular oder E-Mail) werden die Angaben zur Bearbeitung der Kontaktanfrage und deren Abwicklung verarbeitet.</p>
-        
-        <h3>Verarbeitete Daten</h3>
-        <ul>
-            <li>Name, E-Mail-Adresse, Unternehmen</li>
-            <li>Projektart, Budget-Einschätzung, Zeitrahmen</li>
-            <li>Nachrichteninhalt</li>
-        </ul>
-        
-        <h3>Kontaktaufnahme</h3>
-        <p>Die Kontaktaufnahme erfolgt direkt per E-Mail an <strong>info@nobleframe.de</strong>. Ihre Anfragen werden auf unseren E-Mail-Servern verarbeitet und gespeichert.</p>
-        
-        <h3>Rechtsgrundlage</h3>
-        <p>Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen) und Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an effizienter Anfragenbearbeitung).</p>
-        
-        <h3>Speicherdauer</h3>
-        <p>Anfragen werden nach Abschluss der Bearbeitung gelöscht, sofern keine gesetzlichen Aufbewahrungspflichten bestehen (max. 6 Jahre bei Geschäftskorrespondenz).</p>
-    </section>
-
-    <section class="legal-section">
-        <h2>5. Hosting & Server</h2>
-        <p>Unsere Website wird bei folgenden Anbietern gehostet:</p>
-        <ul>
-            <li><strong>STRATO AG</strong> (Deutschland) – für Website-Hosting</li>
-            <li><strong>Google Fonts</strong> – für Schriftarten (ohne Cookie-Setzung)</li>
-        </ul>
-        <p>Bei jedem Zugriff werden automatisch Server-Logfiles erstellt, die IP-Adresse, Zeitstempel, aufgerufene Seite und Browser-Informationen enthalten. Diese Daten werden ausschließlich zur Sicherstellung des technischen Betriebs und zur Abwehr von Angriffen verwendet.</p>
-        
-        <h3>Rechtsgrundlage</h3>
-        <p>Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an sicherem Betrieb).</p>
-    </section>
-
-    <section class="legal-section">
-        <h2>6. Cookies & Tracking</h2>
-        <p>Unsere Website verwendet derzeit <strong>keine Tracking-Cookies</strong> und keine Analyse-Tools wie Google Analytics.</p>
-        
-        <h3>Technisch notwendige Cookies</h3>
-        <p>Es werden ausschließlich technisch notwendige Cookies verwendet, die für den Betrieb der Website erforderlich sind (z.B. Session-Cookies). Diese erfordern keine Einwilligung.</p>
-        
-        <div class="info-box">
-            <p><strong>Cookie-Übersicht:</strong> Aktuell werden keine eigenen Cookies gesetzt. Externe Dienste (Google Fonts) können technische Cookies setzen. Bei Änderungen wird diese Seite aktualisiert.</p>
+    
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">Noble<span>Frame</span></a>
+                    <p>Premium Digital Atelier für exzellente Web-Entwicklung, E-Commerce und digitale Wachstumsstrategien.</p>
+                    <div class="footer-social">
+                        <a href="https://linkedin.com/company/nobleframe" target="_blank" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                        <a href="https://instagram.com/nobleframe.de" target="_blank" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+                    </div>
+                </div>
+                <div class="footer-col"><h4>Navigation</h4><ul><li><a href="index.html">Home</a></li><li><a href="referenzen.html">Referenzen</a></li><li><a href="tools.html">Tools</a></li><li><a href="labs.html">Labs</a></li><li><a href="karriere.html">Karriere</a></li></ul></div>
+                <div class="footer-col"><h4>Services</h4><ul><li><a href="index.html#kompetenzen">Web Development</a></li><li><a href="index.html#kompetenzen">E-Commerce</a></li><li><a href="index.html#kompetenzen">UI/UX Design</a></li><li><a href="index.html#kompetenzen">Growth Strategy</a></li></ul></div>
+                <div class="footer-col"><h4>Client</h4><ul><li><a href="client/index.html">Login</a></li><li><a href="client/index.html#register">Registrieren</a></li><li><a href="faq.html">FAQ</a></li><li><a href="kontakt.html">Support</a></li></ul></div>
+                <div class="footer-col"><h4>Kontakt</h4><div class="footer-contact-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Steinfurt, Deutschland</span></div><div class="footer-contact-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="mailto:hello@nobleframe.de">hello@nobleframe.de</a></div><div class="footer-contact-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><a href="tel:+4925519999999">+49 2551 999 999</a></div></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 NobleFrame. Alle Rechte vorbehalten.</p><div class="footer-legal"><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a><a href="agb.html">AGB</a></div></div>
         </div>
-    </section>
-
-    <section class="legal-section">
-        <h2>7. Ihre Rechte</h2>
-        <p>Sie haben folgende Rechte bezüglich Ihrer personenbezogenen Daten:</p>
-        <ul>
-            <li><strong>Auskunftsrecht (Art. 15 DSGVO)</strong> – Bestätigung, ob Daten verarbeitet werden, und Auskunft über diese Daten.</li>
-            <li><strong>Berichtigungsrecht (Art. 16 DSGVO)</strong> – Korrektur unrichtiger Daten.</li>
-            <li><strong>Löschungsrecht (Art. 17 DSGVO)</strong> – Löschung Ihrer Daten unter bestimmten Voraussetzungen.</li>
-            <li><strong>Einschränkung der Verarbeitung (Art. 18 DSGVO)</strong> – Einschränkung der Datenverarbeitung.</li>
-            <li><strong>Datenübertragbarkeit (Art. 20 DSGVO)</strong> – Erhalt Ihrer Daten in einem strukturierten Format.</li>
-            <li><strong>Widerspruchsrecht (Art. 21 DSGVO)</strong> – Widerspruch gegen Verarbeitung auf Basis berechtigter Interessen.</li>
-            <li><strong>Widerruf der Einwilligung (Art. 7 Abs. 3 DSGVO)</strong> – Jederzeit mit Wirkung für die Zukunft.</li>
-            <li><strong>Beschwerderecht (Art. 77 DSGVO)</strong> – Bei einer Aufsichtsbehörde.</li>
-        </ul>
-        <p>Zur Ausübung Ihrer Rechte kontaktieren Sie uns bitte unter: <a href="/cdn-cgi/l/email-protection#0d64636b624d63626f61686b7f6c6068236968"><span class="__cf_email__" data-cfemail="d5bcbbb3ba95bbbab7b9b0b3a7b4b8b0fbb1b0">[email&#160;protected]</span></a></p>
-    </section>
-
-    <section class="legal-section">
-        <h2>8. Bewerberdaten</h2>
-        <p>Bei Bewerbungen über unsere Karriereseite verarbeiten wir:</p>
-        <ul>
-            <li>Kontaktdaten (Name, E-Mail, Telefon)</li>
-            <li>Bewerbungsunterlagen (Anschreiben, Lebenslauf, Zeugnisse)</li>
-            <li>Gehaltsvorstellungen und Verfügbarkeit</li>
-        </ul>
-        
-        <h3>Zweck der Verarbeitung</h3>
-        <p>Durchführung des Bewerbungsverfahrens und Entscheidung über die Begründung eines Beschäftigungsverhältnisses.</p>
-        
-        <h3>Rechtsgrundlage</h3>
-        <p>§ 26 BDSG (Entscheidung über Begründung eines Beschäftigungsverhältnisses) in Verbindung mit Art. 6 Abs. 1 lit. b DSGVO.</p>
-        
-        <h3>Speicherdauer</h3>
-        <p>Bei Ablehnung: Löschung nach 6 Monaten (sofern keine Einwilligung zur längeren Speicherung). Bei Einstellung: Überführung in die Personalakte.</p>
-        
-        <h3>Freiwilligkeit</h3>
-        <p>Die Bereitstellung Ihrer Daten ist für das Bewerbungsverfahren erforderlich. Ohne diese Daten können wir Ihre Bewerbung nicht berücksichtigen.</p>
-    </section>
-
-    <section class="legal-section">
-        <h2>9. Änderungen dieser Datenschutzerklärung</h2>
-        <p>Wir behalten uns vor, diese Datenschutzerklärung bei Bedarf anzupassen, um sie an geänderte Rechtslagen oder Änderungen unserer Dienste anzupassen. Die aktuelle Version finden Sie stets auf dieser Seite.</p
+    </footer>
+    
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        menuToggle.addEventListener('click', () => { menuToggle.classList.toggle('active'); navLinks.classList.toggle('active'); });
+    </script>
+</body>
+</html>

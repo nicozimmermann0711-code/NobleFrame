@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login – NobleFrame Client Portal</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23000' width='32' height='32'/%3E%3Crect x='2' y='2' width='28' height='28' fill='none' stroke='%23C9A962' stroke-width='2'/%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --gold: #C9A962;
+            --gold-light: #E8D5A3;
+            --black: #000;
+            --black-light: #0a0a0a;
+            --white: #FAFAFA;
+            --white-muted: rgba(250,250,250,.75);
+            --white-subtle: rgba(250,250,250,.45);
+            --red: #E57373;
+            --green: #81C784;
+        }
+
+```
+    html, body { height: 100%; }
+    body {
+        font-family: 'Outfit', sans-serif;
+        background: var(--black);
+        color: var(--white);
+        display: flex;
+        min-height: 100vh;
+    }
+
+    /* Left Side - Branding */
+    .login-brand {
+        flex: 1;
+        background: linear-gradient(135deg, #0a0a0a 0%, #000 100%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 60px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .login-brand::before {
+        content: '';
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(201,169,98,0.08) 0%, transparent 70%);
+        top: -200px;
+        right: -200px;
+    }
+
+    .login-brand::after {
+        content: '';
+        position: absolute;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(201,169,98,0.05) 0%, transparent 70%);
+        bottom: -100px;
+        left: -100px;
+    }
+
+    .brand-content {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        max-width: 500px;
+    }
+
+    .brand-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 40px;
+    }
+
+    .brand-logo svg {
+        width: 60px;
+        height: 60px;
+    }
+
+    .brand-logo span {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 2rem;
+        font-weight: 300;
+        letter-spacing: 10px;
+        color: var(--white);
+    }
+
+    .brand-tagline {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 2.5rem;
+        font-weight: 300;
+        line-height: 1.3;
+        margin-bottom: 30px;
+    }
+
+    .brand-tagline span {
+        background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .brand-description {
+        color: var(--white-muted);
+        font-size: 1.1rem;
+        line-height: 1.7;
+    }
+
+    .brand-features {
+        margin-top: 50px;
+        display: flex;
+        gap: 40px;
+        justify-content: center;
+    }
+
+    .brand-feature {
+        text-align: center;
+    }
+
+    .brand-feature-icon {
+        width: 50px;
+        height: 50px;
+        border: 1px solid rgba(201,169,98,0.3);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 15px;
+    }
+
+    .brand-feature-icon svg {
+        width: 24px;
+        height: 24px;
+        stroke: var(--gold);
+    }
+
+    .brand-feature span {
+        font-size: 0.85rem;
+        color: var(--white-muted);
+    }
+
+    /* Right Side - Login Form */
+    .login-form-container {
+        width: 500px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 60px;
+        background: var(--black-light);
+        border-left: 1px solid rgba(201,169,98,0.1);
+    }
+
+    .login-header {
+        margin-bottom: 40px;
+    }
+
+    .login-header h1 {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 2rem;
+        font-weight: 400;
+        margin-bottom: 10px;
+    }
+
+    .login-header p {
+        color: var(--white-muted);
+        font-size: 0.95rem;
+    }
+
+    /* Tabs */
+    .login-tabs {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 30px;
+    }
+
+    .login-tab {
+        flex: 1;
+        padding: 14px 20px;
+        background: transparent;
+        border: 1px solid rgba(201,169,98,0.2);
+        color: var(--white-muted);
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .login-tab:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+    }
+
+    .login-tab.active {
+        background: var(--gold);
+        border-color: var(--gold);
+        color: var(--black);
+    }
+
+    /* Forms */
+    .login-form {
+        display: none;
+    }
+
+    .login-form.active {
+        display: block;
+    }
+
+    .form-group {
+        margin-bottom: 25px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 0.85rem;
+        color: var(--white-muted);
+        letter-spacing: 0.5px;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 16px 20px;
+        background: rgba(201,169,98,0.03);
+        border: 1px solid rgba(201,169,98,0.2);
+        color: var(--white);
+        font-family: 'Outfit', sans-serif;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .form-group input:focus {
+        outline: none;
+        border-color: var(--gold);
+        background: rgba(201,169,98,0.05);
+    }
+
+    .form-group input::placeholder {
+        color: var(--white-subtle);
+    }
+
+    .form-submit {
+        width: 100%;
+        padding: 16px 30px;
+        background: var(--gold);
+        border: none;
+        color: var(--black);
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .form-submit:hover {
+        background: var(--gold-light);
+    }
+
+    .form-submit:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    /* Messages */
+    .form-message {
+        padding: 15px 20px;
+        margin-bottom: 25px;
+        font-size: 0.9rem;
+        display: none;
+    }
+
+    .form-message.error {
+        display: block;
+        background: rgba(229,115,115,0.1);
+        border: 1px solid rgba(229,115,115,0.3);
+        color: var(--red);
+    }
+
+    .form-message.success {
+        display: block;
+        background: rgba(129,199,132,0.1);
+        border: 1px solid rgba(129,199,132,0.3);
+        color: var(--green);
+    }
+
+    /* MFA Form */
+    .mfa-container {
+        display: none;
+    }
+
+    .mfa-container.active {
+        display: block;
+    }
+
+    .mfa-input {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 25px;
+    }
+
+    .mfa-input input {
+        flex: 1;
+        text-align: center;
+        font-size: 1.5rem;
+        letter-spacing: 5px;
+        padding: 20px;
+    }
+
+    /* Magic Link Success */
+    .magic-link-sent {
+        display: none;
+        text-align: center;
+        padding: 40px 0;
+    }
+
+    .magic-link-sent.active {
+        display: block;
+    }
+
+    .magic-link-sent svg {
+        width: 60px;
+        height: 60px;
+        stroke: var(--green);
+        margin-bottom: 20px;
+    }
+
+    .magic-link-sent h3 {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+
+    .magic-link-sent p {
+        color: var(--white-muted);
+        margin-bottom: 20px;
+    }
+
+    .demo-link {
+        padding: 12px 20px;
+        background: rgba(201,169,98,0.1);
+        border: 1px dashed var(--gold);
+        color: var(--gold);
+        font-size: 0.85rem;
+        word-break: break-all;
+        margin-top: 20px;
+    }
+
+    .demo-link a {
+        color: var(--gold);
+    }
+
+    /* Help Links */
+    .login-help {
+        margin-top: 30px;
+        text-align: center;
+        padding-top: 30px;
+        border-top: 1px solid rgba(201,169,98,0.1);
+    }
+
+    .login-help a {
+        color: var(--gold);
+        text-decoration: none;
+        font-size: 0.9rem;
+    }
+
+    .login-help a:hover {
+        text-decoration: underline;
+    }
+
+    /* Demo Credentials */
+    .demo-credentials {
+        margin-top: 30px;
+        padding: 20px;
+        background: rgba(201,169,98,0.05);
+        border: 1px solid rgba(201,169,98,0.15);
+    }
+
+    .demo-credentials h4 {
+        font-size: 0.8rem;
+        color: var(--gold);
+        letter-spacing: 1px;
+        margin-bottom: 15px;
+    }
+
+    .demo-credentials p {
+        font-size: 0.85rem;
+        color: var(--white-muted);
+        margin-bottom: 8px;
+    }
+
+    .demo-credentials code {
+        color: var(--white);
+        background: rgba(255,255,255,0.1);
+        padding: 2px 6px;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+        .login-brand {
+            display: none;
+        }
+        .login-form-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            border-left: none;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .login-form-container {
+            padding: 40px 25px;
+        }
+    }
+</style>
+```
+
+</head>
+<body>
+
+<!-- Left Side - Branding -->
+
+<div class="login-brand">
+    <div class="brand-content">
+        <div class="brand-logo">
+            <svg viewBox="0 0 100 100">
+                <rect x="5" y="5" width="90" height="90" fill="none" stroke="#C9A962" stroke-width="2"/>
+                <rect x="25" y="25" width="50" height="50" fill="none" stroke="#C9A962" stroke-width="1.5" opacity="0.6"/>
+            </svg>
+            <span>NOBLEFRAME</span>
+        </div>
+
+```
+    <h2 class="brand-tagline">Ihr <span>Client Portal</span></h2>
+    
+    <p class="brand-description">
+        Verfolgen Sie Ihre Projekte in Echtzeit, geben Sie Designs frei und haben Sie alle Deliverables an einem Ort. Transparent, sicher, effizient.
+    </p>
+
+    <div class="brand-features">
+        <div class="brand-feature">
+            <div class="brand-feature-icon">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                </svg>
+            </div>
+            <span>Sicher</span>
+        </div>
+        <div class="brand-feature">
+            <div class="brand-feature-icon">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+            </div>
+            <span>Echtzeit</span>
+        </div>
+        <div class="brand-feature">
+            <div class="brand-feature-icon">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+                </svg>
+            </div>
+            <span>Übersichtlich</span>
+        </div>
+    </div>
+</div>
+```
+
+</div>
+
+<!-- Right Side - Login Form -->
+
+<div class="login-form-container">
+    <div class="login-header">
+        <h1>Willkommen zurück</h1>
+        <p>Melden Sie sich an, um auf Ihr Portal zuzugreifen</p>
+    </div>
+
+```
+<!-- Login Tabs -->
+<div class="login-tabs">
+    <button class="login-tab active" data-tab="magic">Magic Link</button>
+    <button class="login-tab" data-tab="password">Passwort</button>
+</div>
+
+<!-- Error/Success Messages -->
+<div class="form-message" id="formMessage"></div>
+
+<!-- Magic Link Form -->
+<form class="login-form active" id="magicForm">
+    <div class="form-group">
+        <label for="magicEmail">E-Mail-Adresse</label>
+        <input type="email" id="magicEmail" placeholder="ihre@email.de" required>
+    </div>
+    <button type="submit" class="form-submit">Magic Link senden</button>
+</form>
+
+<!-- Magic Link Sent Confirmation -->
+<div class="magic-link-sent" id="magicLinkSent">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+    </svg>
+    <h3>E-Mail gesendet!</h3>
+    <p>Falls ein Account mit dieser E-Mail existiert, haben Sie einen Login-Link erhalten.</p>
+    <button class="form-submit" onclick="resetMagicForm()">Zurück</button>
+    <div class="demo-link" id="demoLink" style="display:none;">
+        <strong>Demo-Link:</strong><br>
+        <a href="#" id="demoLinkUrl"></a>
+    </div>
+</div>
+
+<!-- Password Form -->
+<form class="login-form" id="passwordForm">
+    <div class="form-group">
+        <label for="passwordEmail">E-Mail-Adresse</label>
+        <input type="email" id="passwordEmail" placeholder="ihre@email.de" required>
+    </div>
+    <div class="form-group">
+        <label for="password">Passwort</label>
+        <input type="password" id="password" placeholder="••••••••" required>
+    </div>
+    <button type="submit" class="form-submit">Anmelden</button>
+</form>
+
+<!-- MFA Form -->
+<div class="mfa-container" id="mfaContainer">
+    <div class="form-group">
+        <label>Authentifizierungscode eingeben</label>
+        <p style="color: var(--white-subtle); font-size: 0.85rem; margin-bottom: 15px;">
+            Geben Sie den 6-stelligen Code aus Ihrer Authenticator-App ein.
+        </p>
+    </div>
+    <div class="mfa-input">
+        <input type="text" id="mfaCode" maxlength="6" placeholder="000000" pattern="[0-9]{6}">
+    </div>
+    <button type="button" class="form-submit" onclick="verifyMFA()">Bestätigen</button>
+</div>
+
+<!-- Help Links -->
+<div class="login-help">
+    <a href="../index.html">← Zurück zur Website</a>
+</div>
+
+<!-- Demo Credentials -->
+<div class="demo-credentials">
+    <h4>DEMO-ZUGANGSDATEN</h4>
+    <p><strong>Client Admin:</strong> <code>demo@kunde.de</code> / <code>demo123</code></p>
+    <p><strong>Client Member:</strong> <code>team@kunde.de</code> / <code>team123</code></p>
+    <p><strong>NF Admin (MFA):</strong> <code>max@nobleframe.de</code> / <code>nf2024</code></p>
+    <p style="margin-top: 10px; font-size: 0.8rem; color: var(--white-subtle);">
+        MFA-Code: beliebige 6 Ziffern eingeben
+    </p>
+</div>
+```
+
+</div>
+
+<script src="portal-core.js"></script>
+
+<script>
+// Check if already logged in
+const existingUser = PortalCore.checkAuth();
+if (existingUser) {
+    window.location.href = 'dashboard.html';
+}
+
+// Check for magic link token in URL
+const urlParams = new URLSearchParams(window.location.search);
+const token = urlParams.get('token');
+if (token) {
+    const result = PortalCore.verifyMagicLink(token);
+    if (result.success) {
+        if (result.requireMFA) {
+            showMFA();
+        } else {
+            window.location.href = 'dashboard.html';
+        }
+    } else {
+        showMessage(result.error, 'error');
+    }
+}
+
+// Tab switching
+const tabs = document.querySelectorAll('.login-tab');
+const forms = document.querySelectorAll('.login-form');
+
+tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        const target = tab.dataset.tab;
+        
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        forms.forEach(f => f.classList.remove('active'));
+        document.getElementById(target + 'Form').classList.add('active');
+        
+        document.getElementById('magicLinkSent').classList.remove('active');
+        document.getElementById('mfaContainer').classList.remove('active');
+        hideMessage();
+    });
+});
+
+// Magic Link Form
+document.getElementById('magicForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = document.getElementById('magicEmail').value;
+    
+    const result = PortalCore.sendMagicLink(email);
+    
+    if (result.success) {
+        document.getElementById('magicForm').classList.remove('active');
+        document.getElementById('magicLinkSent').classList.add('active');
+        
+        // Show demo link
+        if (result.demoToken) {
+            const demoLink = document.getElementById('demoLink');
+            const demoLinkUrl = document.getElementById('demoLinkUrl');
+            demoLink.style.display = 'block';
+            demoLinkUrl.href = 'login.html?token=' + result.demoToken;
+            demoLinkUrl.textContent = 'login.html?token=' + result.demoToken;
+        }
+    }
+});
+
+function resetMagicForm() {
+    document.getElementById('magicLinkSent').classList.remove('active');
+    document.getElementById('magicForm').classList.add('active');
+    document.getElementById('magicEmail').value = '';
+    document.getElementById('demoLink').style.display = 'none';
+}
+
+// Password Form
+document.getElementById('passwordForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = document.getElementById('passwordEmail').value;
+    const password = document.getElementById('password').value;
+    
+    const result = PortalCore.login(email, password);
+    
+    if (result.success) {
+        if (result.requireMFA) {
+            showMFA();
+        } else {
+            window.location.href = 'dashboard.html';
+        }
+    } else {
+        showMessage(result.error, 'error');
+    }
+});
+
+// MFA
+function showMFA() {
+    document.querySelectorAll('.login-form').forEach(f => f.classList.remove('active'));
+    document.querySelectorAll('.login-tab').forEach(t => t.style.display = 'none');
+    document.getElementById('mfaContainer').classList.add('active');
+    document.getElementById('mfaCode').focus();
+}
+
+function verifyMFA() {
+    const code = document.getElementById('mfaCode').value;
+    const result = PortalCore.verifyMFA(code);
+    
+    if (result.success) {
+        window.location.href = 'dashboard.html';
+    } else {
+        showMessage(result.error, 'error');
+    }
+}
+
+// Auto-submit MFA when 6 digits entered
+document.getElementById('mfaCode').addEventListener('input', (e) => {
+    if (e.target.value.length === 6) {
+        verifyMFA();
+    }
+});
+
+// Message helpers
+function showMessage(text, type) {
+    const msg = document.getElementById('formMessage');
+    msg.textContent = text;
+    msg.className = 'form-message ' + type;
+}
+
+function hideMessage() {
+    document.getElementById('formMessage').className = 'form-message';
+}
+</script>
+
+</body>
+</html>
