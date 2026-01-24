@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitenkarte | Tim Schülke - NobleFrame</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+            font-family: 'Outfit', sans-serif;
+            padding: 20px;
+        }
+        
+        .card-container {
+            perspective: 1500px;
+            width: 400px;
+            height: 240px;
+        }
+        
+        .card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+        
+        .card:hover {
+            transform: rotateY(180deg);
+        }
+        
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            background: #000;
+            border: 1px solid rgba(201, 169, 98, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .card-face::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(rgba(201, 169, 98, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(201, 169, 98, 0.02) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        
+        /* Front */
+        .card-front {
+            flex-direction: column;
+            gap: 25px;
+            padding: 40px;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            animation: logoGlow 4s ease-in-out infinite;
+        }
+        
+        @keyframes logoGlow {
+            0%, 100% { filter: drop-shadow(0 0 5px rgba(201, 169, 98, 0.3)); }
+            50% { filter: drop-shadow(0 0 15px rgba(201, 169, 98, 0.5)); }
+        }
+        
+        .logo-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .logo-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 300;
+            letter-spacing: 8px;
+            color: #FAFAFA;
+            text-transform: uppercase;
+        }
+        
+        .name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: #FAFAFA;
+            letter-spacing: 2px;
+        }
+        
+        .title {
+            font-size: 0.75rem;
+            color: #C9A962;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: -15px;
+        }
+        
+        .flip-hint {
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+            font-size: 0.65rem;
+            color: rgba(201, 169, 98, 0.4);
+            letter-spacing: 1px;
+        }
+        
+        /* Back */
+        .card-back {
+            transform: rotateY(180deg);
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px;
+            gap: 20px;
+        }
+        
+        .back-logo {
+            width: 35px;
+            height: 35px;
+            margin-bottom: 10px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: rgba(250, 250, 250, 0.8);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            color: #C9A962;
+        }
+        
+        .contact-item svg {
+            width: 16px;
+            height: 16px;
+            stroke: #C9A962;
+            flex-shrink: 0;
+        }
+        
+        .website-link {
+            position: absolute;
+            bottom: 25px;
+            right: 30px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            color: #C9A962;
+            text-decoration: none;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+        
+        .website-link:hover {
+            color: #E8D5A3;
+        }
+        
+        /* Corner accents */
+        .corner {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 1px solid #C9A962;
+            opacity: 0.4;
+        }
+        
+        .corner-tl { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+        .corner-tr { top: 10px; right: 10px; border-left: none; border-bottom: none; }
+        .corner-bl { bottom: 10px; left: 10px; border-right: none; border-top: none; }
+        .corner-br { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+        
+        /* Instructions */
+        .instructions {
+            margin-top: 30px;
+            text-align: center;
+            color: rgba(250, 250, 250, 0.3);
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+<div>
+    <div class="card-container">
+        <div class="card">
+            <!-- Front -->
+            <div class="card-face card-front">
+                <div class="corner corner-tl"></div>
+                <div class="corner corner-tr"></div>
+                <div class="corner corner-bl"></div>
+                <div class="corner corner-br"></div>
+                
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="5" y="5" width="90" height="90" fill="none" stroke="#C9A962" stroke-width="2"/>
+                            <rect x="25" y="25" width="50" height="50" fill="none" stroke="#C9A962" stroke-width="1.5" opacity="0.6"/>
+                            <line x1="50" y1="5" x2="50" y2="95" stroke="#C9A962" stroke-width="0.5" opacity="0.4"/>
+                            <line x1="5" y1="50" x2="95" y2="50" stroke="#C9A962" stroke-width="0.5" opacity="0.4"/>
+                        </svg>
+                    </div>
+                    <span class="logo-text">NobleFrame</span>
+                </div>
+                
+                <div style="text-align: center;">
+                    <p class="name">Tim Schülke</p>
+                    <p class="title">Geschäftsführer</p>
+                </div>
+                
+                <span class="flip-hint">Hover to flip →</span>
+            </div>
+            
+            <!-- Back -->
+            <div class="card-face card-back">
+                <div class="corner corner-tl"></div>
+                <div class="corner corner-tr"></div>
+                <div class="corner corner-bl"></div>
+                <div class="corner corner-br"></div>
+                
+                <div class="back-logo">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="5" y="5" width="90" height="90" fill="none" stroke="#C9A962" stroke-width="2"/>
+                        <rect x="25" y="25" width="50" height="50" fill="none" stroke="#C9A962" stroke-width="1.5" opacity="0.6"/>
+                        <line x1="50" y1="5" x2="50" y2="95" stroke="#C9A962" stroke-width="0.5" opacity="0.4"/>
+                        <line x1="5" y1="50" x2="95" y2="50" stroke="#C9A962" stroke-width="0.5" opacity="0.4"/>
+                    </svg>
+                </div>
+                
+                <div class="contact-info">
+                    <a href="mailto:Tim@NobleFrame.de" class="contact-item">
+                        <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/>
+                        </svg>
+                        Tim@NobleFrame.de
+                    </a>
+                    <a href="tel:+4915292612795" class="contact-item">
+                        <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"/>
+                        </svg>
+                        +49 152 92612795
+                    </a>
+                </div>
+                
+                <a href="https://nobleframe.de" target="_blank" class="website-link">nobleframe.de</a>
+            </div>
+        </div>
+    </div>
+    
+    <p class="instructions">Hover über die Karte um sie zu drehen</p>
+</div>
+
+</body>
+</html>

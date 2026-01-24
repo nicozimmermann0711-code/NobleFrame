@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>NobleFrame Briefpapier</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 11pt;
+            line-height: 1.6;
+            color: #333;
+            background: white;
+        }
+        
+        .letterhead {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 20mm 25mm 25mm 25mm;
+            position: relative;
+            background: white;
+        }
+        
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 25mm;
+            padding-bottom: 8mm;
+            border-bottom: 2px solid #C9A962;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo {
+            width: 45px;
+            height: 45px;
+            border: 2px solid #C9A962;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .logo::before {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            border: 1.5px solid #C9A962;
+            opacity: 0.6;
+        }
+        
+        .logo-text {
+            font-family: Georgia, serif;
+            font-size: 22px;
+            font-weight: 300;
+            letter-spacing: 6px;
+            color: #000;
+            text-transform: uppercase;
+        }
+        
+        .contact-info {
+            text-align: right;
+            font-size: 9pt;
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        .contact-info strong {
+            color: #C9A962;
+        }
+        
+        /* Sender line */
+        .sender-line {
+            font-size: 8pt;
+            color: #999;
+            margin-bottom: 10mm;
+            padding-bottom: 2mm;
+            border-bottom: 1px solid #eee;
+        }
+        
+        /* Address window */
+        .address-window {
+            height: 40mm;
+            margin-bottom: 15mm;
+        }
+        
+        .recipient {
+            font-size: 11pt;
+            line-height: 1.5;
+        }
+        
+        /* Date & Reference */
+        .date-section {
+            text-align: right;
+            margin-bottom: 15mm;
+            font-size: 10pt;
+            color: #666;
+        }
+        
+        /* Subject */
+        .subject {
+            font-size: 12pt;
+            font-weight: 600;
+            margin-bottom: 10mm;
+            color: #000;
+        }
+        
+        /* Body */
+        .body-content {
+            margin-bottom: 15mm;
+        }
+        
+        .body-content p {
+            margin-bottom: 1em;
+        }
+        
+        /* Signature */
+        .signature {
+            margin-top: 15mm;
+        }
+        
+        .signature-line {
+            margin-bottom: 5mm;
+            color: #666;
+        }
+        
+        .signature-name {
+            font-weight: 600;
+            color: #000;
+        }
+        
+        .signature-role {
+            font-size: 10pt;
+            color: #C9A962;
+        }
+        
+        /* Footer */
+        .footer {
+            position: absolute;
+            bottom: 15mm;
+            left: 25mm;
+            right: 25mm;
+            padding-top: 5mm;
+            border-top: 1px solid #C9A962;
+            font-size: 8pt;
+            color: #999;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .footer-left, .footer-center, .footer-right {
+            flex: 1;
+        }
+        
+        .footer-center {
+            text-align: center;
+        }
+        
+        .footer-right {
+            text-align: right;
+        }
+        
+        /* Gold accent */
+        .gold {
+            color: #C9A962;
+        }
+        
+        /* Print styles */
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            
+            .letterhead {
+                page-break-after: always;
+            }
+        }
+        
+        /* Editable area hint */
+        .editable {
+            background: rgba(201, 169, 98, 0.05);
+            padding: 2px 4px;
+            border-radius: 2px;
+        }
+        
+        .editable:hover {
+            background: rgba(201, 169, 98, 0.1);
+            outline: 1px dashed #C9A962;
+        }
+        
+        /* Preview notice */
+        .preview-notice {
+            background: #000;
+            color: #C9A962;
+            padding: 15px 25px;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .preview-notice button {
+            background: #C9A962;
+            color: #000;
+            border: none;
+            padding: 10px 25px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        @media print {
+            .preview-notice {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="preview-notice">
+    <span>Vorschau des NobleFrame Briefpapiers – Bearbeitbare Felder sind leicht hervorgehoben</span>
+    <button onclick="window.print()">Als PDF drucken</button>
+</div>
+
+<div class="letterhead">
+    <!-- Header -->
+    <header class="header">
+        <div class="logo-section">
+            <div class="logo"></div>
+            <span class="logo-text">NobleFrame</span>
+        </div>
+        <div class="contact-info">
+            <strong>NobleFrame</strong><br>
+            Nico Zimmermann & Tim Schülke<br>
+            <br>
+            info@nobleframe.de<br>
+            +49 152 92612795<br>
+            nobleframe.de
+        </div>
+    </header>
+    
+    <!-- Sender line (for window envelope) -->
+    <div class="sender-line">
+        NobleFrame · Nico Zimmermann & Tim Schülke · info@nobleframe.de
+    </div>
+    
+    <!-- Recipient Address -->
+    <div class="address-window">
+        <div class="recipient editable" contenteditable="true">
+            Firma Mustermann GmbH<br>
+            z. Hd. Max Mustermann<br>
+            Musterstraße 123<br>
+            12345 Musterstadt
+        </div>
+    </div>
+    
+    <!-- Date -->
+    <div class="date-section">
+        <span class="editable" contenteditable="true">Steinfurt, 06. Januar 2026</span>
+    </div>
+    
+    <!-- Subject -->
+    <div class="subject">
+        <span class="editable" contenteditable="true">Angebot für Website-Relaunch</span>
+    </div>
+    
+    <!-- Body -->
+    <div class="body-content editable" contenteditable="true">
+        <p>Sehr geehrte Damen und Herren,</p>
+        
+        <p>vielen Dank für Ihr Interesse an unseren Leistungen. Gerne unterbreiten wir Ihnen folgendes Angebot:</p>
+        
+        <p>[Hier können Sie Ihren Briefinhalt einfügen. Klicken Sie einfach auf den Text, um ihn zu bearbeiten.]</p>
+        
+        <p>Bei Fragen stehen wir Ihnen jederzeit zur Verfügung.</p>
+        
+        <p>Mit freundlichen Grüßen</p>
+    </div>
+    
+    <!-- Signature -->
+    <div class="signature">
+        <div class="signature-line">
+            <br><br><br>
+        </div>
+        <div class="signature-name editable" contenteditable="true">Nico Zimmermann</div>
+        <div class="signature-role">Gründer & Geschäftsführung</div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-left">
+            NobleFrame<br>
+            Nico Zimmermann & Tim Schülke
+        </div>
+        <div class="footer-center">
+            info@nobleframe.de<br>
+            nobleframe.de
+        </div>
+        <div class="footer-right">
+            USt-IdNr.: DE 128 456 422
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>
